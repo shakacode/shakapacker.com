@@ -1,0 +1,3 @@
+/shakapacker/docs/* /docs/:splat 301
+/shakapacker/docs /docs 301
+/docs/README /docs 301

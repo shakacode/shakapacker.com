@@ -1,0 +1,17 @@
+{
+  "name": "shakapacker-com",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "sync:docs": "node scripts/sync-docs.mjs",
+    "prepare:docs": "node scripts/prepare-docs.mjs --target docusaurus",
+    "audit:docs": "node scripts/audit-docs.mjs",
+    "prepare": "npm run sync:docs && npm run prepare:docs",
+    "install:site": "npm --prefix prototypes/docusaurus install",
+    "dev": "npm --prefix prototypes/docusaurus run start",
+    "build": "npm --prefix prototypes/docusaurus run build",
+    "build:full": "npm run prepare && npm run build",
+    "cloudflare:deploy": "npm run build:full && npx wrangler pages deploy prototypes/docusaurus/build --project-name ${CLOUDFLARE_PAGES_PROJECT:-shakapacker-com}"
+  }
+}

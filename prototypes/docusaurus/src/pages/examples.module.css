@@ -1,0 +1,45 @@
+.main {
+  padding: 2.5rem 0 3.5rem;
+}
+
+.grid {
+  margin-top: 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--site-surface-0);
+  border: 1px solid var(--site-border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: var(--site-card-shadow);
+  transition: border-color 0.16s ease, transform 0.16s ease;
+}
+
+.card:hover {
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-1px);
+}
+
+.card h2 {
+  margin-bottom: 0.6rem;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 996px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding: 1.75rem 0 2.5rem;
+  }
+
+  .card {
+    border-radius: 10px;
+  }
+}
