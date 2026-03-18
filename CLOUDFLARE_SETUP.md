@@ -46,3 +46,12 @@ If you have historical URLs under `www.shakacode.com/shakapacker/docs/*`, add re
 | `www.shakacode.com/shakapacker/docs/*` | `https://shakapacker.com/docs/*` | 301 |
 
 Verify by visiting an old docs URL and confirming a 301 redirect to `shakapacker.com`.
+
+## Worker Build Defaults
+
+If you keep the separate Cloudflare Worker build pipeline enabled for this repo:
+
+- Build command: `npm run build`
+- Deploy command: `npx wrangler deploy`
+
+`package.json` and `wrangler.toml` are configured so these default commands resolve docs, build Docusaurus, and deploy static assets without extra CLI flags.

@@ -21,10 +21,11 @@ Production site workspace for [shakapacker.com](https://shakapacker.com), built 
 
 ## Build
 
-- Build from prepared docs:
+- Build from prepared docs only:
+  - `npm run build:site`
+- Full build from fresh docs sync and prepare:
   - `npm run build`
-- Full build from fresh docs sync:
-  - `npm run build:full`
+  - (`npm run build:full` is an alias)
 
 ## Docs Sync Source Resolution
 
