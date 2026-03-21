@@ -282,6 +282,14 @@ body {
   text-decoration: none;
 }
 
+[data-theme='dark'] .navbar-cta {
+  background: #1f6feb;
+}
+
+[data-theme='dark'] .navbar-cta:hover {
+  background: #1a62d1;
+}
+
 @media (max-width: 640px) {
   :root {
     --ifm-font-size-base: 15.5px;
