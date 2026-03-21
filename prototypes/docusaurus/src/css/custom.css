@@ -267,6 +267,21 @@ body {
   }
 }
 
+.navbar-cta {
+  background: var(--ifm-color-primary);
+  color: #ffffff !important;
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem !important;
+  font-weight: 620;
+  transition: background-color 0.18s ease;
+}
+
+.navbar-cta:hover {
+  background: var(--ifm-color-primary-dark);
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
 @media (max-width: 640px) {
   :root {
     --ifm-font-size-base: 15.5px;
