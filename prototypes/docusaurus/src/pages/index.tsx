@@ -314,7 +314,7 @@ function ConsultationSection() {
 
 function OperationsSection() {
   return (
-    <section className={styles.sectionInk}>
+    <section className={styles.sectionSoft}>
       <div className="container">
         <div className={styles.sectionHeader}>
           <p className={styles.sectionEyebrow}>Production notes</p>

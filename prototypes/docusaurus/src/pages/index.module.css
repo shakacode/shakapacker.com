@@ -92,8 +92,7 @@
 }
 
 .section,
-.sectionSoft,
-.sectionInk {
+.sectionSoft {
   padding: 2.5rem 0;
 }
 
@@ -101,17 +100,6 @@
   background: var(--site-soft-surface);
   border-top: 1px solid var(--site-border);
   border-bottom: 1px solid var(--site-border);
-}
-
-.sectionInk {
-  background: var(--site-soft-surface);
-  color: var(--ifm-color-content);
-  border-top: 1px solid var(--site-border);
-  border-bottom: 1px solid var(--site-border);
-}
-
-.sectionInk .sectionEyebrow {
-  color: var(--ifm-color-primary-dark);
 }
 
 .sectionHeader {

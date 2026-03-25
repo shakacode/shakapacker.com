@@ -64,7 +64,7 @@ export default function ExamplesPage(): ReactNode {
             <p className={styles.sectionEyebrow}>Choose a path</p>
             <h2>Start from your current app state.</h2>
           </div>
-          <div className={styles.grid}>
+          <div className={`${styles.grid} ${styles.evaluationGrid}`}>
             {evaluationPaths.map((path) => (
               <article className={styles.card} key={path.title}>
                 <p className={styles.cardEyebrow}>{path.eyebrow}</p>
