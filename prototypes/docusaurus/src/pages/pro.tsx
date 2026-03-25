@@ -4,31 +4,52 @@ import Layout from '@theme/Layout';
 
 import styles from './pro.module.css';
 
+const supportSteps = [
+  {
+    step: '1',
+    title: 'Start with docs and troubleshooting',
+    description:
+      'Use the official guides first so your team can isolate whether an issue is setup, upgrade, or runtime related.',
+  },
+  {
+    step: '2',
+    title: 'Collect reproduction details',
+    description:
+      'Capture Rails, Ruby, Node, and Shakapacker versions plus failing commands to reduce turnaround time.',
+  },
+  {
+    step: '3',
+    title: 'Book implementation support',
+    description:
+      'When blockers remain, schedule time with ShakaCode maintainers for direct architecture and migration guidance.',
+  },
+];
+
 const supportRows = [
   {
-    feature: 'Documentation and issue tracker',
-    oss: 'Public GitHub docs and issues',
+    feature: 'Core docs and upgrade guides',
+    oss: 'Included',
     pro: 'Included',
   },
   {
-    feature: 'Community help',
-    oss: 'GitHub Discussions',
+    feature: 'Community issue/discussion channels',
+    oss: 'Included',
     pro: 'Included',
   },
   {
-    feature: 'Direct implementation support',
-    oss: 'No',
-    pro: 'Available via ShakaCode services',
+    feature: 'Hands-on implementation support',
+    oss: 'Self-service',
+    pro: 'Available through ShakaCode services',
   },
   {
-    feature: 'Migration guidance for complex apps',
+    feature: 'Migration planning for complex apps',
     oss: 'Self-service docs',
-    pro: 'Hands-on consulting available',
+    pro: 'Direct maintainer guidance',
   },
   {
-    feature: 'Sustained maintenance sponsorship',
-    oss: 'Optional sponsorship',
-    pro: 'Priority support options',
+    feature: 'Performance/build pipeline review',
+    oss: 'General guidance',
+    pro: 'Project-specific recommendations',
   },
 ];
 
@@ -38,18 +59,21 @@ export default function ProPage(): ReactNode {
       <main className={styles.main}>
         <section className={styles.hero}>
           <div className="container">
+            <p className={styles.kicker}>Open source docs with optional maintainer support</p>
             <h1>Shakapacker Support</h1>
             <p>
-              Start with the open-source docs and discussions. For teams that need guided migration
-              or production hardening, ShakaCode provides direct support.
+              Shakapacker is open source and fully usable without paid plans. For teams that need
+              migration strategy, performance tuning, or production troubleshooting, ShakaCode
+              offers direct implementation support.
             </p>
             <div className={styles.actions}>
               <Link className="button button--primary button--lg" to="/docs">
-                Read Documentation
+                Read the docs
               </Link>
-              <Link
-                className="button button--secondary button--lg"
-                to="https://www.shakacode.com/contact/">
+              <Link className="button button--secondary button--lg" to="/docs/troubleshooting">
+                Open troubleshooting guide
+              </Link>
+              <Link className="button button--secondary button--lg" href="https://www.shakacode.com/contact/">
                 Contact ShakaCode
               </Link>
             </div>
@@ -57,15 +81,39 @@ export default function ProPage(): ReactNode {
         </section>
 
         <section className="container">
-          <div className={styles.policyCard}>
-            <h2>Support Model</h2>
-            <p>
-              Shakapacker is open source and fully usable without paid plans.
-            </p>
-            <p>
-              If your team needs implementation help, performance tuning, or migration planning,
-              email <a href="mailto:justin@shakacode.com">justin@shakacode.com</a>.
-            </p>
+          <div className={styles.grid}>
+            <article className={styles.policyCard}>
+              <p className={styles.cardEyebrow}>Engagement flow</p>
+              <h2>Three steps to get targeted help quickly.</h2>
+              <ol className={styles.stepList}>
+                {supportSteps.map((step) => (
+                  <li key={step.step}>
+                    <span className={styles.stepBadge}>{step.step}</span>
+                    <div>
+                      <strong>{step.title}</strong>
+                      <p>{step.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </article>
+
+            <article className={styles.policyCard}>
+              <p className={styles.cardEyebrow}>Support model</p>
+              <h2>Use community docs first, then pull in maintainers when needed.</h2>
+              <p>
+                The open-source docs and repository discussions cover the common setup and upgrade
+                path.
+              </p>
+              <p>
+                For project-specific constraints, email{' '}
+                <a href="mailto:justin@shakacode.com">justin@shakacode.com</a> to arrange direct
+                support.
+              </p>
+              <p className={styles.note}>
+                ShakaCode focuses on practical implementation outcomes, not generic audits.
+              </p>
+            </article>
           </div>
         </section>
 
@@ -76,7 +124,7 @@ export default function ProPage(): ReactNode {
               <thead>
                 <tr>
                   <th>Capability</th>
-                  <th>Community</th>
+                  <th>Open Source</th>
                   <th>ShakaCode Support</th>
                 </tr>
               </thead>
@@ -92,7 +140,7 @@ export default function ProPage(): ReactNode {
             </table>
           </div>
           <p className={styles.note}>
-            Need implementation guidance? Reach out at{' '}
+            Need implementation guidance for your app? Contact{' '}
             <a href="mailto:justin@shakacode.com">justin@shakacode.com</a>.
           </p>
         </section>

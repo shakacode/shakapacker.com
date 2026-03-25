@@ -1,89 +1,202 @@
 .heroBanner {
-  background: var(--site-hero-background);
-  color: var(--ifm-color-content);
-  padding: 4rem 0 3rem;
-  border-bottom: 1px solid var(--site-border-color);
+  padding: 2.7rem 0 2.2rem;
+  border-bottom: 1px solid var(--site-border);
+  background: var(--site-soft-surface);
+}
+
+.heroLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 0.95fr);
+  gap: 0.9rem;
+  align-items: end;
 }
 
 .heroContent {
-  max-width: 54rem;
+  max-width: 44rem;
 }
 
-.kicker {
+.heroPanel {
+  border: 1px solid var(--site-border);
+  border-radius: 8px;
+  padding: 0.9rem;
+  background: var(--site-surface);
+}
+
+.kicker,
+.panelLabel,
+.sectionEyebrow,
+.cardEyebrow {
+  margin: 0 0 0.55rem;
   text-transform: uppercase;
-  letter-spacing: 0.08rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
+  letter-spacing: 0.06rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.kicker,
+.sectionEyebrow {
+  color: var(--ifm-color-primary-dark);
+}
+
+.panelLabel,
+.cardEyebrow {
   color: var(--ifm-color-content-secondary);
 }
 
 .title {
-  font-size: clamp(2.1rem, 5vw, 3.3rem);
-  line-height: 1.15;
-  margin-bottom: 0.75rem;
+  max-width: 14ch;
+  margin-bottom: 0.7rem;
+  font-size: clamp(1.95rem, 4.5vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
 }
 
 .subtitle {
-  max-width: 44rem;
-  font-size: clamp(1.02rem, 2vw, 1.2rem);
-  line-height: 1.5;
+  max-width: 40rem;
+  margin-bottom: 0;
+  font-size: clamp(0.98rem, 1.5vw, 1.08rem);
+  line-height: 1.55;
   color: var(--ifm-color-content-secondary);
 }
 
 .buttons {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   display: flex;
-  gap: 0.65rem;
+  gap: 0.6rem;
   flex-wrap: wrap;
 }
 
-.section {
-  padding: 2.8rem 0;
+.heroSteps {
+  margin: 0;
+  padding-left: 1.1rem;
 }
 
-.sectionAlt {
-  background: var(--site-surface-1);
-  padding: 2.8rem 0;
-  border-top: 1px solid var(--site-border-color);
-  border-bottom: 1px solid var(--site-border-color);
+.heroSteps li + li {
+  margin-top: 0.45rem;
 }
 
-.stepGrid {
+.panelActions {
+  margin-top: 0.7rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.copyButton {
+  min-width: 8.6rem;
+  justify-content: center;
+}
+
+.panelNote {
+  margin: 1rem 0 0;
+  color: var(--ifm-color-content-secondary);
+}
+
+.section,
+.sectionSoft,
+.sectionInk {
+  padding: 2.5rem 0;
+}
+
+.sectionSoft {
+  background: var(--site-soft-surface);
+  border-top: 1px solid var(--site-border);
+  border-bottom: 1px solid var(--site-border);
+}
+
+.sectionInk {
+  background: var(--site-soft-surface);
+  color: var(--ifm-color-content);
+  border-top: 1px solid var(--site-border);
+  border-bottom: 1px solid var(--site-border);
+}
+
+.sectionInk .sectionEyebrow {
+  color: var(--ifm-color-primary-dark);
+}
+
+.sectionHeader {
+  max-width: 42rem;
+  margin-bottom: 1rem;
+}
+
+.sectionHeader h2 {
+  margin-bottom: 0;
+  font-size: clamp(1.7rem, 3.4vw, 2.35rem);
+  line-height: 1.18;
+}
+
+.personaGrid,
+.flowGrid,
+.migrationGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0.9rem;
 }
 
-.stepCard {
-  background: var(--site-surface-0);
-  border: 1px solid var(--site-border-color);
-  border-radius: 12px;
-  padding: 1.05rem;
-  box-shadow: var(--site-card-shadow);
+.personaGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.flowGrid,
+.migrationGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.personaCard,
+.flowCard,
+.migrationCard,
+.quoteCard {
+  border: 1px solid var(--site-border);
+  border-radius: 8px;
+  background: var(--site-surface);
+  padding: 0.95rem;
+  box-shadow: none;
+}
+
+.personaCard h3,
+.flowCard h3,
+.migrationCard h3 {
+  margin-bottom: 0.55rem;
+  line-height: 1.12;
+}
+
+.flowSummary {
+  min-height: 4.4rem;
+  color: var(--ifm-color-content-secondary);
 }
 
 .inlineCode {
-  display: inline-block;
-  margin: 0.2rem 0 0.75rem;
-  background: var(--site-surface-1);
-  border: 1px solid var(--site-border-color);
+  display: block;
+  margin: 0 0 1rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--site-border);
   border-radius: 6px;
-  padding: 0.45rem 0.55rem;
+  background: var(--site-inline-code-surface);
+  color: var(--ifm-color-content);
+  overflow-x: auto;
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 700;
 }
 
 .quoteGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0.9rem;
 }
 
 .quoteCard {
   margin: 0;
-  background: var(--site-surface-0);
-  border: 1px solid var(--site-border-color);
-  border-radius: 12px;
-  padding: 1rem 1rem 0.9rem;
-  box-shadow: var(--site-card-shadow);
+  border-color: var(--site-border);
+  background: var(--site-surface);
+  box-shadow: none;
+}
+
+.quoteCard p {
+  color: var(--ifm-color-content);
 }
 
 .quoteCard footer {
@@ -94,33 +207,61 @@
   color: var(--ifm-color-content-secondary);
 }
 
+.consultationBanner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+
+.consultationContent {
+  max-width: 38rem;
+}
+
+.consultationContent h2 {
+  margin-bottom: 0.55rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.18;
+}
+
+.consultationContent p:last-child {
+  margin-bottom: 0;
+  color: var(--ifm-color-content-secondary);
+}
+
+.consultationActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
 @media (max-width: 996px) {
   .heroBanner {
-    padding: 3rem 0 2.5rem;
+    padding: 2.2rem 0 1.8rem;
   }
 
-  .stepGrid,
+  .heroLayout,
+  .personaGrid,
+  .flowGrid,
+  .migrationGrid,
   .quoteGrid {
     grid-template-columns: 1fr;
   }
-}
 
-@media (max-width: 640px) {
-  .heroBanner {
-    padding: 2.4rem 0 2.1rem;
+  .heroPanel {
+    max-width: 30rem;
   }
 
-  .title {
-    font-size: clamp(1.9rem, 9vw, 2.35rem);
+  .flowSummary {
+    min-height: 0;
   }
 
-  .buttons {
-    width: 100%;
-    gap: 0.5rem;
+  .consultationBanner {
+    grid-template-columns: 1fr;
   }
 
-  .stepCard,
-  .quoteCard {
-    border-radius: 10px;
+  .consultationActions {
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }

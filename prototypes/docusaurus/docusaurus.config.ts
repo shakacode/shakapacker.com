@@ -70,8 +70,18 @@ const config: Config = {
     colorMode: {
       respectPrefersColorScheme: true,
     },
+    announcementBar: {
+      id: 'consultation_cta',
+      content:
+        'Need expert help with your Shakapacker setup? <a href="https://meetings.hubspot.com/justingordon/30-minute-consultation">Book a complimentary 30-minute assessment</a> with the ShakaCode team.',
+      isCloseable: true,
+    },
     navbar: {
       title: 'Shakapacker',
+      logo: {
+        alt: 'Shakapacker Logo',
+        src: 'img/logo-mark.png',
+      },
       items: [
         {
           type: 'docSidebar',
@@ -105,17 +115,19 @@ const config: Config = {
         {
           title: 'Docs',
           items: [
-            {label: 'Overview', to: '/docs'},
+            {label: 'Documentation Guide', to: '/docs'},
             {label: 'Configuration', to: '/docs/configuration'},
             {label: 'Deployment', to: '/docs/deployment'},
+            {label: 'Rspack Migration', to: '/docs/rspack_migration_guide'},
+            {label: 'Troubleshooting', to: '/docs/troubleshooting'},
           ],
         },
         {
           title: 'Resources',
           items: [
             {
-              label: 'Repository',
-              href: 'https://github.com/shakacode/shakapacker',
+              label: 'Resources Page',
+              to: '/examples',
             },
             {
               label: 'Discussions',
@@ -124,6 +136,10 @@ const config: Config = {
             {
               label: 'ShakaCode',
               href: 'https://www.shakacode.com',
+            },
+            {
+              label: 'Book a Complimentary Assessment',
+              href: 'https://meetings.hubspot.com/justingordon/30-minute-consultation',
             },
           ],
         },
@@ -150,6 +166,7 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.vsDark,
+      additionalLanguages: ['ruby', 'markup-templating', 'erb', 'diff', 'haml', 'bash', 'regex', 'ignore'],
     },
   } satisfies Preset.ThemeConfig,
 };
