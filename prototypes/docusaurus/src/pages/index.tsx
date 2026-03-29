@@ -23,22 +23,6 @@ const quickStartSteps = [
   },
 ];
 
-const testimonials = [
-  {
-    quote:
-      'The impact has been between a 2-4x build speed increase depending on the environment and conditions. The typical case of first startup with a warm cache has gone from roughly 1m with Webpack down to about 20s.',
-    author: 'Jon Rajavuori',
-    org: 'Academia.edu',
-    orgUrl: 'https://www.academia.edu/',
-    context: 'On migrating from Webpack to rspack with ShakaCode',
-    stats: [
-      {label: 'Warm-cache startup', value: '1m → 20s'},
-      {label: 'Incremental prod builds', value: '~10s'},
-      {label: 'Cold-cache startup', value: '4m30s → 3m30s'},
-    ],
-  },
-];
-
 const highlights = [
   {
     quote:
@@ -51,6 +35,35 @@ const highlights = [
       'Configuration, upgrades, and troubleshooting guidance are versioned alongside the source code.',
     author: 'Docs from source',
     role: 'Always aligned with current releases',
+  },
+  {
+    quote:
+      '2-4x build speed increase. Warm-cache startup went from ~1m to ~20s, and incremental prod builds now take ~10s.',
+    author: 'Rspack at Academia.edu',
+    role: 'Jon Rajavuori on migrating from Webpack to Rspack with ShakaCode',
+  },
+];
+
+const rspackBenefits = [
+  {
+    title: 'Drop-in Webpack replacement',
+    description:
+      'Rspack is wire-compatible with Webpack 5. Existing loaders, plugins, and config files work without rewriting your build pipeline.',
+  },
+  {
+    title: '2-4x faster builds',
+    description:
+      'Written in Rust, Rspack delivers dramatically faster cold starts, warm-cache rebuilds, and incremental production builds compared to Webpack.',
+  },
+  {
+    title: 'Rails-native integration',
+    description:
+      'Unlike Vite, Rspack works with Shakapacker out of the box — no ejecting from the Rails asset pipeline, no custom server configuration.',
+  },
+  {
+    title: 'Production-proven',
+    description:
+      'Teams like Academia.edu run Rspack in production, seeing warm-cache startup drop from ~1m to ~20s and incremental deploys finish in ~10s.',
   },
 ];
 
@@ -122,33 +135,28 @@ function HighlightsSection() {
   );
 }
 
-function TestimonialsSection() {
+function RspackSection() {
   return (
     <section className={styles.sectionAlt}>
       <div className="container">
-        <h2>What Teams Are Saying</h2>
-        {testimonials.map((t) => (
-          <blockquote className={styles.testimonialCard} key={t.author}>
-            <p className={styles.testimonialQuote}>{t.quote}</p>
-            <div className={styles.statRow}>
-              {t.stats.map((s) => (
-                <div className={styles.stat} key={s.label}>
-                  <span className={styles.statValue}>{s.value}</span>
-                  <span className={styles.statLabel}>{s.label}</span>
-                </div>
-              ))}
-            </div>
-            <footer className={styles.testimonialFooter}>
-              <strong>{t.author}</strong>
-              <span>
-                {t.context} &mdash;{' '}
-                <a href={t.orgUrl} target="_blank" rel="noopener noreferrer">
-                  {t.org}
-                </a>
-              </span>
-            </footer>
-          </blockquote>
-        ))}
+        <h2>Rspack Support</h2>
+        <p className={styles.rspackIntro}>
+          Shakapacker ships with first-class{' '}
+          <a href="https://rspack.dev/" target="_blank" rel="noopener noreferrer">
+            Rspack
+          </a>{' '}
+          support — a Rust-powered bundler that&rsquo;s wire-compatible with Webpack 5 but
+          dramatically faster. Switch bundlers with a one-line config change; no migration rewrite
+          needed.
+        </p>
+        <div className={styles.benefitGrid}>
+          {rspackBenefits.map((b) => (
+            <article className={styles.benefitCard} key={b.title}>
+              <h3>{b.title}</h3>
+              <p>{b.description}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -176,9 +184,9 @@ export default function Home(): ReactNode {
       <HeroSection />
       <main>
         <QuickStartSection />
-        <TestimonialsSection />
-        <ArchitectureSection />
+        <RspackSection />
         <HighlightsSection />
+        <ArchitectureSection />
       </main>
     </Layout>
   );

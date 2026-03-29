@@ -73,7 +73,7 @@
 
 .quoteGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -94,51 +94,35 @@
   color: var(--ifm-color-content-secondary);
 }
 
-.testimonialCard {
-  margin: 0;
+.rspackIntro {
+  max-width: 48rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ifm-color-content-secondary);
+  margin-bottom: 1.25rem;
+}
+
+.benefitGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.benefitCard {
   background: var(--site-surface-0);
   border: 1px solid var(--site-border-color);
   border-radius: 12px;
-  padding: 1.25rem 1.25rem 1.1rem;
+  padding: 1.05rem;
   box-shadow: var(--site-card-shadow);
 }
 
-.testimonialQuote {
-  font-size: 1.05rem;
-  line-height: 1.55;
-  font-style: italic;
+.benefitCard h3 {
+  margin-bottom: 0.35rem;
 }
 
-.statRow {
-  display: flex;
-  gap: 1.5rem;
-  margin: 1rem 0;
-  flex-wrap: wrap;
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
-.statValue {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--ifm-color-primary);
-}
-
-.statLabel {
-  font-size: 0.82rem;
+.benefitCard p {
   color: var(--ifm-color-content-secondary);
-}
-
-.testimonialFooter {
-  margin-top: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  color: var(--ifm-color-content-secondary);
+  margin-bottom: 0;
 }
 
 @media (max-width: 996px) {
@@ -147,7 +131,8 @@
   }
 
   .stepGrid,
-  .quoteGrid {
+  .quoteGrid,
+  .benefitGrid {
     grid-template-columns: 1fr;
   }
 }
@@ -167,7 +152,8 @@
   }
 
   .stepCard,
-  .quoteCard {
+  .quoteCard,
+  .benefitCard {
     border-radius: 10px;
   }
 }
