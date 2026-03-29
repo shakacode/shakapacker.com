@@ -23,6 +23,22 @@ const quickStartSteps = [
   },
 ];
 
+const testimonials = [
+  {
+    quote:
+      'The impact has been between a 2-4x build speed increase depending on the environment and conditions. The typical case of first startup with a warm cache has gone from roughly 1m with Webpack down to about 20s.',
+    author: 'Jon Rajavuori',
+    org: 'Academia.edu',
+    orgUrl: 'https://www.academia.edu/',
+    context: 'On migrating from Webpack to rspack with ShakaCode',
+    stats: [
+      {label: 'Warm-cache startup', value: '1m → 20s'},
+      {label: 'Incremental prod builds', value: '~10s'},
+      {label: 'Cold-cache startup', value: '4m30s → 3m30s'},
+    ],
+  },
+];
+
 const highlights = [
   {
     quote:
@@ -106,6 +122,38 @@ function HighlightsSection() {
   );
 }
 
+function TestimonialsSection() {
+  return (
+    <section className={styles.sectionAlt}>
+      <div className="container">
+        <h2>What Teams Are Saying</h2>
+        {testimonials.map((t) => (
+          <blockquote className={styles.testimonialCard} key={t.author}>
+            <p className={styles.testimonialQuote}>{t.quote}</p>
+            <div className={styles.statRow}>
+              {t.stats.map((s) => (
+                <div className={styles.stat} key={s.label}>
+                  <span className={styles.statValue}>{s.value}</span>
+                  <span className={styles.statLabel}>{s.label}</span>
+                </div>
+              ))}
+            </div>
+            <footer className={styles.testimonialFooter}>
+              <strong>{t.author}</strong>
+              <span>
+                {t.context} &mdash;{' '}
+                <a href={t.orgUrl} target="_blank" rel="noopener noreferrer">
+                  {t.org}
+                </a>
+              </span>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function ArchitectureSection() {
   return (
     <section className={styles.section}>
@@ -128,6 +176,7 @@ export default function Home(): ReactNode {
       <HeroSection />
       <main>
         <QuickStartSection />
+        <TestimonialsSection />
         <ArchitectureSection />
         <HighlightsSection />
       </main>

@@ -94,6 +94,53 @@
   color: var(--ifm-color-content-secondary);
 }
 
+.testimonialCard {
+  margin: 0;
+  background: var(--site-surface-0);
+  border: 1px solid var(--site-border-color);
+  border-radius: 12px;
+  padding: 1.25rem 1.25rem 1.1rem;
+  box-shadow: var(--site-card-shadow);
+}
+
+.testimonialQuote {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  font-style: italic;
+}
+
+.statRow {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.statValue {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+}
+
+.statLabel {
+  font-size: 0.82rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+.testimonialFooter {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  color: var(--ifm-color-content-secondary);
+}
+
 @media (max-width: 996px) {
   .heroBanner {
     padding: 3rem 0 2.5rem;
