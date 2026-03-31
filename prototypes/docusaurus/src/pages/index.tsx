@@ -38,6 +38,24 @@ const highlights = [
   },
 ];
 
+const rspackBenefits = [
+  {
+    title: 'Drop-in Webpack replacement',
+    description:
+      'Rspack is wire-compatible with Webpack 5. Existing loaders, plugins, and config files work without rewriting your build pipeline.',
+  },
+  {
+    title: '2-4x faster builds',
+    description:
+      'Written in Rust, Rspack delivers dramatically faster cold starts, warm-cache rebuilds, and incremental production builds compared to Webpack.',
+  },
+  {
+    title: 'Rails-native integration',
+    description:
+      'Unlike Vite, Rspack works with Shakapacker out of the box — no ejecting from the Rails asset pipeline, no custom server configuration.',
+  },
+];
+
 function HeroSection() {
   return (
     <header className={clsx(styles.heroBanner)}>
@@ -101,6 +119,63 @@ function HighlightsSection() {
             </blockquote>
           ))}
         </div>
+        <div className={styles.testimonialCard}>
+          <div className={styles.testimonialHeader}>
+            <span className={styles.testimonialBrand}>Academia.edu</span>
+            <span className={styles.testimonialLabel}>Case Study</span>
+          </div>
+          <blockquote className={styles.testimonialQuote}>
+            <p>
+              2-4x build speed increase. Warm-cache startup went from ~1m to ~20s, and incremental
+              prod builds now take ~10s.
+            </p>
+          </blockquote>
+          <div className={styles.testimonialStats}>
+            <div className={styles.testimonialStat}>
+              <span className={styles.statValue}>2-4x</span>
+              <span className={styles.statLabel}>faster builds</span>
+            </div>
+            <div className={styles.testimonialStat}>
+              <span className={styles.statValue}>~20s</span>
+              <span className={styles.statLabel}>warm-cache startup</span>
+            </div>
+            <div className={styles.testimonialStat}>
+              <span className={styles.statValue}>~10s</span>
+              <span className={styles.statLabel}>incremental deploys</span>
+            </div>
+          </div>
+          <p className={styles.testimonialAttribution}>
+            <strong>Jon Rajavuori</strong> — ShakaCode helped Academia.edu migrate from Webpack to
+            Rspack
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RspackSection() {
+  return (
+    <section className={styles.sectionAlt}>
+      <div className="container">
+        <h2>Rspack Support</h2>
+        <p className={styles.rspackIntro}>
+          Shakapacker ships with first-class{' '}
+          <a href="https://rspack.dev/" target="_blank" rel="noopener noreferrer">
+            Rspack
+          </a>{' '}
+          support — a Rust-powered bundler that&rsquo;s wire-compatible with Webpack 5 but
+          dramatically faster. Switch bundlers with a one-line config change; no migration rewrite
+          needed.
+        </p>
+        <div className={styles.benefitGrid}>
+          {rspackBenefits.map((b) => (
+            <article className={styles.benefitCard} key={b.title}>
+              <h3>{b.title}</h3>
+              <p>{b.description}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -128,8 +203,9 @@ export default function Home(): ReactNode {
       <HeroSection />
       <main>
         <QuickStartSection />
-        <ArchitectureSection />
+        <RspackSection />
         <HighlightsSection />
+        <ArchitectureSection />
       </main>
     </Layout>
   );
