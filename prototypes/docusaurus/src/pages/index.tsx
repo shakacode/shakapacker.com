@@ -32,9 +32,9 @@ const highlights = [
   },
   {
     quote:
-      'Configuration, upgrades, and troubleshooting guidance are versioned alongside the source code.',
+      'Full guides for configuration, upgrades, and troubleshooting ship with every release — always in sync with the version you\'re running.',
     author: 'Docs from source',
-    role: 'Always aligned with current releases',
+    role: 'Browse docs in the docs/ directory',
   },
 ];
 
