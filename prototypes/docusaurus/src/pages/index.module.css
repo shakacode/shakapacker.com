@@ -73,7 +73,7 @@
 
 .quoteGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -91,6 +91,83 @@
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+.testimonialCard {
+  margin-top: 1.25rem;
+  background: var(--site-surface-0);
+  border: 2px solid var(--ifm-color-primary);
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--site-card-shadow);
+}
+
+.testimonialHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.testimonialBrand {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.testimonialLabel {
+  font-size: 0.72rem;
+  font-weight: 620;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ifm-color-primary);
+  background: color-mix(in srgb, var(--ifm-color-primary) 10%, transparent);
+  padding: 0.18rem 0.55rem;
+  border-radius: 4px;
+}
+
+.testimonialQuote {
+  margin: 0 0 1.15rem;
+  border-left: none;
+  padding: 0;
+}
+
+.testimonialQuote p {
+  font-size: 1.12rem;
+  line-height: 1.55;
+  color: var(--ifm-color-content);
+  margin: 0;
+}
+
+.testimonialStats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.15rem;
+}
+
+.testimonialStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.statValue {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  line-height: 1.2;
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+.testimonialAttribution {
+  margin: 0;
+  font-size: 0.9rem;
   color: var(--ifm-color-content-secondary);
 }
 
@@ -153,7 +230,20 @@
 
   .stepCard,
   .quoteCard,
-  .benefitCard {
+  .benefitCard,
+  .testimonialCard {
     border-radius: 10px;
+  }
+
+  .testimonialCard {
+    padding: 1.15rem 1.25rem;
+  }
+
+  .testimonialStats {
+    gap: 1.25rem;
+  }
+
+  .statValue {
+    font-size: 1.4rem;
   }
 }

@@ -36,12 +36,6 @@ const highlights = [
     author: 'Docs from source',
     role: 'Always aligned with current releases',
   },
-  {
-    quote:
-      '2-4x build speed increase. Warm-cache startup went from ~1m to ~20s, and incremental prod builds now take ~10s.',
-    author: 'Rspack at Academia.edu',
-    role: 'Jon Rajavuori on migrating from Webpack to Rspack with ShakaCode',
-  },
 ];
 
 const rspackBenefits = [
@@ -59,11 +53,6 @@ const rspackBenefits = [
     title: 'Rails-native integration',
     description:
       'Unlike Vite, Rspack works with Shakapacker out of the box — no ejecting from the Rails asset pipeline, no custom server configuration.',
-  },
-  {
-    title: 'Production-proven',
-    description:
-      'Teams like Academia.edu run Rspack in production, seeing warm-cache startup drop from ~1m to ~20s and incremental deploys finish in ~10s.',
   },
 ];
 
@@ -129,6 +118,36 @@ function HighlightsSection() {
               </footer>
             </blockquote>
           ))}
+        </div>
+        <div className={styles.testimonialCard}>
+          <div className={styles.testimonialHeader}>
+            <span className={styles.testimonialBrand}>Academia.edu</span>
+            <span className={styles.testimonialLabel}>Case Study</span>
+          </div>
+          <blockquote className={styles.testimonialQuote}>
+            <p>
+              2-4x build speed increase. Warm-cache startup went from ~1m to ~20s, and incremental
+              prod builds now take ~10s.
+            </p>
+          </blockquote>
+          <div className={styles.testimonialStats}>
+            <div className={styles.testimonialStat}>
+              <span className={styles.statValue}>2-4x</span>
+              <span className={styles.statLabel}>faster builds</span>
+            </div>
+            <div className={styles.testimonialStat}>
+              <span className={styles.statValue}>~20s</span>
+              <span className={styles.statLabel}>warm-cache startup</span>
+            </div>
+            <div className={styles.testimonialStat}>
+              <span className={styles.statValue}>~10s</span>
+              <span className={styles.statLabel}>incremental deploys</span>
+            </div>
+          </div>
+          <p className={styles.testimonialAttribution}>
+            <strong>Jon Rajavuori</strong> — ShakaCode helped Academia.edu migrate from Webpack to
+            Rspack
+          </p>
         </div>
       </div>
     </section>
