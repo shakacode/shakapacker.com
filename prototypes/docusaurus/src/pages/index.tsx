@@ -203,6 +203,35 @@ function ArchitectureSection() {
   );
 }
 
+function ExpertHelpSection() {
+  return (
+    <section className={styles.section}>
+      <div className="container">
+        <div className={styles.expertHelpBanner}>
+          <div className={styles.expertHelpContent}>
+            <p className={styles.rspackKicker}>Expert Help</p>
+            <h2>Get direct guidance from the team behind Shakapacker</h2>
+            <p>
+              Planning a Webpack-to-Rspack migration or troubleshooting production builds? Book a
+              complimentary 30-minute assessment with ShakaCode.
+            </p>
+          </div>
+          <div className={styles.expertHelpActions}>
+            <Link
+              className="button button--primary button--lg"
+              href="https://meetings.hubspot.com/justingordon/30-minute-consultation">
+              Book a free assessment
+            </Link>
+            <Link className="button button--secondary button--lg" href="https://www.shakacode.com/contact/">
+              Contact ShakaCode
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home(): ReactNode {
   return (
     <Layout
@@ -214,6 +243,7 @@ export default function Home(): ReactNode {
         <RspackSection />
         <HighlightsSection />
         <ArchitectureSection />
+        <ExpertHelpSection />
       </main>
     </Layout>
   );

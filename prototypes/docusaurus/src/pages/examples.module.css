@@ -33,9 +33,47 @@
   font-size: 1.05rem;
 }
 
+.conversionBanner {
+  margin-top: 1.4rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.4rem;
+  align-items: center;
+  border: 1px solid var(--site-border-color);
+  border-radius: 12px;
+  background: var(--site-surface-1);
+  box-shadow: var(--site-card-shadow);
+  padding: 1.1rem;
+}
+
+.conversionBanner h2 {
+  margin-bottom: 0.45rem;
+  font-size: 1.2rem;
+}
+
+.conversionBanner p {
+  margin-bottom: 0;
+  color: var(--ifm-color-content-secondary);
+}
+
+.conversionActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
 @media (max-width: 996px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .conversionBanner {
+    grid-template-columns: 1fr;
+  }
+
+  .conversionActions {
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }
 

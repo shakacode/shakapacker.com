@@ -234,6 +234,37 @@
   margin-bottom: 0;
 }
 
+.expertHelpBanner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  border: 1px solid var(--site-border-color);
+  border-radius: 12px;
+  background: var(--site-surface-1);
+  padding: 1.2rem;
+  box-shadow: var(--site-card-shadow);
+}
+
+.expertHelpContent {
+  max-width: 42rem;
+}
+
+.expertHelpContent h2 {
+  margin-bottom: 0.45rem;
+}
+
+.expertHelpContent p:last-child {
+  margin-bottom: 0;
+  color: var(--ifm-color-content-secondary);
+}
+
+.expertHelpActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
 @media (max-width: 996px) {
   .heroBanner {
     padding: 2.25rem 0 2.1rem;
@@ -252,6 +283,15 @@
   .rspackLogo {
     width: 72px;
     height: 72px;
+  }
+
+  .expertHelpBanner {
+    grid-template-columns: 1fr;
+  }
+
+  .expertHelpActions {
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }
 
