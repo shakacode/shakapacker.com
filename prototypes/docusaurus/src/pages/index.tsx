@@ -59,7 +59,7 @@ const rspackBenefits = [
 function HeroSection() {
   return (
     <header className={clsx(styles.heroBanner)}>
-      <div className={clsx('container', styles.heroContent)}>
+      <div className="container">
         <p className={styles.kicker}>JavaScript Bundling for Rails</p>
         <h1 className={styles.title}>Shakapacker</h1>
         <p className={styles.subtitle}>
