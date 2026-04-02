@@ -3,12 +3,18 @@
 }
 
 .hero {
-  padding: 2.8rem 0;
-  margin-bottom: 2rem;
+  padding: 2.2rem 0;
+  margin-bottom: 1.6rem;
   background: var(--site-hero-background);
   color: var(--ifm-color-content);
   border-top: 1px solid var(--site-border-color);
   border-bottom: 1px solid var(--site-border-color);
+}
+
+.hero .container > :first-child,
+.policyCard > :first-child,
+section.container > :first-child {
+  margin-top: 0;
 }
 
 .actions {
@@ -74,8 +80,8 @@
 
 @media (max-width: 640px) {
   .hero {
-    padding: 2.15rem 0;
-    margin-bottom: 1.4rem;
+    padding: 1.8rem 0;
+    margin-bottom: 1.1rem;
   }
 
   .policyCard,
