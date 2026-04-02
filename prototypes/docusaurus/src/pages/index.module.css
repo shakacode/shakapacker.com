@@ -1,7 +1,7 @@
 .heroBanner {
   background: var(--site-hero-background);
   color: var(--ifm-color-content);
-  padding: 4rem 0 3rem;
+  padding: 2.75rem 0 2.5rem;
   border-bottom: 1px solid var(--site-border-color);
 }
 
@@ -40,14 +40,24 @@
 }
 
 .section {
-  padding: 2.8rem 0;
+  padding: 2.4rem 0;
 }
 
 .sectionAlt {
   background: var(--site-surface-1);
-  padding: 2.8rem 0;
+  padding: 2.4rem 0;
   border-top: 1px solid var(--site-border-color);
   border-bottom: 1px solid var(--site-border-color);
+}
+
+.heroContent > :first-child,
+.section > .container > :first-child,
+.sectionAlt > .container > :first-child,
+.stepCard > :first-child,
+.quoteCard > :first-child,
+.benefitCard > :first-child,
+.testimonialCard > :first-child {
+  margin-top: 0;
 }
 
 .stepGrid {
@@ -232,7 +242,7 @@
 
 @media (max-width: 996px) {
   .heroBanner {
-    padding: 3rem 0 2.5rem;
+    padding: 2.25rem 0 2.1rem;
   }
 
   .stepGrid,
@@ -253,7 +263,7 @@
 
 @media (max-width: 640px) {
   .heroBanner {
-    padding: 2.4rem 0 2.1rem;
+    padding: 1.85rem 0 1.7rem;
   }
 
   .title {
