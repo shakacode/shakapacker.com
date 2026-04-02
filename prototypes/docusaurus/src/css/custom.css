@@ -89,6 +89,8 @@ body {
   width: 100%;
   max-width: var(--ifm-container-width);
   margin: 0 auto;
+  padding: 0 var(--ifm-spacing-horizontal);
+  box-sizing: border-box;
 }
 
 @media (min-width: 1440px) {
