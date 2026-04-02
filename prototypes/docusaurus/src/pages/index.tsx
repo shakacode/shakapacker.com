@@ -209,7 +209,7 @@ function ExpertHelpSection() {
       <div className="container">
         <div className={styles.expertHelpBanner}>
           <div className={styles.expertHelpContent}>
-            <p className={styles.rspackKicker}>Expert Help</p>
+            <p className={styles.expertHelpKicker}>Expert Help</p>
             <h2>Get direct guidance from the team behind Shakapacker</h2>
             <p>
               Planning a Webpack-to-Rspack migration or troubleshooting production builds? Book a

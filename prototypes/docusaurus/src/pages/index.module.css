@@ -250,6 +250,15 @@
   max-width: 42rem;
 }
 
+.expertHelpKicker {
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 620;
+  color: var(--ifm-color-primary);
+}
+
 .expertHelpContent h2 {
   margin-bottom: 0.45rem;
 }
