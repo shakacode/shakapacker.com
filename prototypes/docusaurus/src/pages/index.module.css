@@ -171,6 +171,32 @@
   color: var(--ifm-color-content-secondary);
 }
 
+.rspackHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.rspackLogo {
+  display: block;
+  width: 84px;
+  height: 84px;
+}
+
+.rspackKicker {
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 620;
+  color: var(--ifm-color-primary);
+}
+
+.rspackHeader h2 {
+  margin: 0;
+}
+
 .rspackIntro {
   max-width: 48rem;
   font-size: 1.05rem;
@@ -212,6 +238,15 @@
   .benefitGrid {
     grid-template-columns: 1fr;
   }
+
+  .rspackHeader {
+    align-items: flex-start;
+  }
+
+  .rspackLogo {
+    width: 72px;
+    height: 72px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -245,5 +280,10 @@
 
   .statValue {
     font-size: 1.4rem;
+  }
+
+  .rspackHeader {
+    flex-direction: column;
+    gap: 0.6rem;
   }
 }

@@ -26,15 +26,15 @@ const quickStartSteps = [
 const highlights = [
   {
     quote:
-      'Drop-in Rails integration for modern JavaScript bundling with Webpack 5 and Rspack support.',
-    author: 'Rails-first workflow',
-    role: 'Keep your existing conventions',
+      'Installation, configuration, and deployment guidance is sourced directly from the shakapacker/docs tree.',
+    author: 'Docs from source',
+    role: 'Always aligned with current releases',
   },
   {
     quote:
-      'Full guides for configuration, upgrades, and troubleshooting ship with every release — always in sync with the version you\'re running.',
-    author: 'Docs from source',
-    role: 'Browse docs in the docs/ directory',
+      'Keep webpack-style configuration and Rails conventions while switching the build engine to Rspack for major speed gains.',
+    author: 'Rails-first migration',
+    role: 'No rewrite required',
   },
 ];
 
@@ -63,8 +63,8 @@ function HeroSection() {
         <p className={styles.kicker}>JavaScript Bundling for Rails</p>
         <h1 className={styles.title}>Shakapacker</h1>
         <p className={styles.subtitle}>
-          Production-focused docs for configuring, deploying, and upgrading Shakapacker in Rails
-          applications.
+          Official docs for installing, configuring, deploying, and upgrading Shakapacker in Rails
+          applications, with first-class Rspack support.
         </p>
         <div className={styles.buttons}>
           <Link className="button button--primary button--lg" to="/docs">
@@ -119,6 +119,41 @@ function HighlightsSection() {
             </blockquote>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function RspackSection() {
+  return (
+    <section className={styles.sectionAlt}>
+      <div className="container">
+        <div className={styles.rspackHeader}>
+          <a href="https://rspack.rs/" target="_blank" rel="noopener noreferrer">
+            <img className={styles.rspackLogo} src="/img/rspack-logo.svg" alt="Rspack logo" />
+          </a>
+          <div>
+            <p className={styles.rspackKicker}>Shakapacker + Rspack</p>
+            <h2>2-4x Faster Builds, Same Rails Workflow</h2>
+          </div>
+        </div>
+        <p className={styles.rspackIntro}>
+          Shakapacker ships with first-class{' '}
+          <a href="https://rspack.rs/" target="_blank" rel="noopener noreferrer">
+            Rspack
+          </a>{' '}
+          support — a Rust-powered bundler that&rsquo;s wire-compatible with Webpack 5 but
+          dramatically faster. Switch bundlers with a one-line config change; no migration rewrite
+          needed.
+        </p>
+        <div className={styles.benefitGrid}>
+          {rspackBenefits.map((b) => (
+            <article className={styles.benefitCard} key={b.title}>
+              <h3>{b.title}</h3>
+              <p>{b.description}</p>
+            </article>
+          ))}
+        </div>
         <div className={styles.testimonialCard}>
           <div className={styles.testimonialHeader}>
             <span className={styles.testimonialBrand}>Academia.edu</span>
@@ -148,33 +183,6 @@ function HighlightsSection() {
             <strong>Jon Rajavuori</strong> — ShakaCode helped Academia.edu migrate from Webpack to
             Rspack
           </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function RspackSection() {
-  return (
-    <section className={styles.sectionAlt}>
-      <div className="container">
-        <h2>Rspack Support</h2>
-        <p className={styles.rspackIntro}>
-          Shakapacker ships with first-class{' '}
-          <a href="https://rspack.dev/" target="_blank" rel="noopener noreferrer">
-            Rspack
-          </a>{' '}
-          support — a Rust-powered bundler that&rsquo;s wire-compatible with Webpack 5 but
-          dramatically faster. Switch bundlers with a one-line config change; no migration rewrite
-          needed.
-        </p>
-        <div className={styles.benefitGrid}>
-          {rspackBenefits.map((b) => (
-            <article className={styles.benefitCard} key={b.title}>
-              <h3>{b.title}</h3>
-              <p>{b.description}</p>
-            </article>
-          ))}
         </div>
       </div>
     </section>
