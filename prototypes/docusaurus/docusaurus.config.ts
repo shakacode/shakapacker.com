@@ -70,6 +70,12 @@ const config: Config = {
     colorMode: {
       respectPrefersColorScheme: true,
     },
+    announcementBar: {
+      id: 'consultation_cta',
+      content:
+        'Want expert advice on your Shakapacker setup? <a href="https://meetings.hubspot.com/justingordon/30-minute-consultation">Book a complimentary 30-minute assessment</a> with the ShakaCode team.',
+      isCloseable: true,
+    },
     navbar: {
       title: 'Shakapacker',
       items: [
@@ -124,6 +130,10 @@ const config: Config = {
             {
               label: 'ShakaCode',
               href: 'https://www.shakacode.com',
+            },
+            {
+              label: 'Book a Complimentary Assessment',
+              href: 'https://meetings.hubspot.com/justingordon/30-minute-consultation',
             },
           ],
         },

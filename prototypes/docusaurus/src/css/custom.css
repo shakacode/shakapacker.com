@@ -85,20 +85,6 @@ body {
   backdrop-filter: saturate(160%) blur(8px);
 }
 
-.navbar__inner {
-  width: 100%;
-  max-width: var(--ifm-container-width);
-  margin: 0 auto;
-  padding: 0 var(--ifm-spacing-horizontal);
-  box-sizing: border-box;
-}
-
-@media (min-width: 1440px) {
-  .navbar__inner {
-    max-width: var(--ifm-container-width-xl);
-  }
-}
-
 .navbar__brand {
   display: inline-flex;
   align-items: center;
@@ -133,6 +119,19 @@ body {
 
 .navbar__link--active {
   background: color-mix(in srgb, var(--ifm-color-primary) 12%, transparent);
+}
+
+div[class*='announcementBar'] {
+  background: var(--site-surface-1);
+  border-bottom: 1px solid var(--site-border-color);
+  font-size: 0.9rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+div[class*='announcementBar'] a {
+  color: var(--ifm-color-primary);
+  font-weight: 620;
+  text-decoration: underline;
 }
 
 .theme-doc-sidebar-container {

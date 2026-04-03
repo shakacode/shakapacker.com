@@ -46,6 +46,25 @@ export default function ExamplesPage(): ReactNode {
               </article>
             ))}
           </div>
+          <aside className={styles.conversionBanner}>
+            <div>
+              <h2>Need help applying this in production?</h2>
+              <p>
+                Book a complimentary 30-minute assessment with ShakaCode to review your Rails build
+                setup and migration plan.
+              </p>
+            </div>
+            <div className={styles.conversionActions}>
+              <Link
+                className="button button--primary button--lg"
+                href="https://meetings.hubspot.com/justingordon/30-minute-consultation">
+                Book assessment
+              </Link>
+              <Link className="button button--secondary button--lg" href="https://www.shakacode.com/contact/">
+                Contact ShakaCode
+              </Link>
+            </div>
+          </aside>
         </section>
       </main>
     </Layout>
