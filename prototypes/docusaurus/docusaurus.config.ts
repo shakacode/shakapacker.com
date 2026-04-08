@@ -54,6 +54,9 @@ const config: Config = {
           routeBasePath: 'docs',
           exclude: [...GlobExcludeDefault, '**/planning/**'],
           editUrl: ({docPath}) => {
+            if (docPath === 'README.md') {
+              return undefined;
+            }
             const root = 'https://github.com/shakacode/shakapacker/tree/main/docs/';
             return `${root}${docPath}`;
           },
