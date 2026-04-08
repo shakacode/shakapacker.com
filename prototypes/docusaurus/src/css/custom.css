@@ -199,11 +199,18 @@ body {
   letter-spacing: -0.01em;
 }
 
+.markdown h1,
+.markdown h2 {
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--site-border-color);
+}
+
 .markdown code {
   background: var(--site-surface-1);
   border: 1px solid var(--site-border-color);
   border-radius: 6px;
   font-family: var(--ifm-font-family-monospace);
+  color: var(--ifm-color-content);
 }
 
 .markdown pre {
@@ -217,6 +224,35 @@ body {
   border: none;
   border-radius: 0;
   color: inherit;
+}
+
+.markdown blockquote {
+  border-left: 0.25rem solid var(--site-border-color);
+  color: var(--ifm-color-content-secondary);
+  padding: 0 1em;
+  margin: 0 0 1rem;
+  background: none;
+}
+
+.markdown table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
+}
+
+.markdown th {
+  font-weight: 600;
+}
+
+.markdown th,
+.markdown td {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--site-border-color);
+}
+
+.markdown tbody tr:nth-child(2n) {
+  background: var(--site-surface-1);
 }
 
 .pagination-nav__link {
@@ -309,6 +345,7 @@ body {
   border-radius: 8px;
   padding: 0.4rem 0.9rem !important;
   font-weight: 620;
+  font-size: 0.85rem;
   transition: background-color 0.18s ease;
 }
 
