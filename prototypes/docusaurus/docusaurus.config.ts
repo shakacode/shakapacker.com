@@ -78,6 +78,12 @@ const config: Config = {
     },
     navbar: {
       title: 'Shakapacker',
+      logo: {
+        alt: 'Shakapacker Logo',
+        src: 'img/logo-mark.png',
+        width: 40,
+        height: 40,
+      },
       items: [
         {
           type: 'docSidebar',
@@ -111,9 +117,11 @@ const config: Config = {
         {
           title: 'Docs',
           items: [
-            {label: 'Overview', to: '/docs'},
+            {label: 'Documentation Guide', to: '/docs'},
             {label: 'Configuration', to: '/docs/configuration'},
             {label: 'Deployment', to: '/docs/deployment'},
+            {label: 'Rspack Migration', to: '/docs/rspack_migration_guide'},
+            {label: 'Troubleshooting', to: '/docs/troubleshooting'},
           ],
         },
         {
