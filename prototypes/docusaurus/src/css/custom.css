@@ -355,6 +355,11 @@ body {
   text-decoration: none;
 }
 
+/* Hide the default bottom "Edit this page" link — replaced by top-of-page edit button */
+.theme-doc-footer-edit-meta-row {
+  display: none;
+}
+
 @media (max-width: 640px) {
   :root {
     --ifm-font-size-base: 15.5px;
