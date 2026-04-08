@@ -206,6 +206,12 @@ div[class*='announcementBar'] a {
   box-shadow: var(--site-card-shadow);
 }
 
+.markdown pre code {
+  border: none;
+  border-radius: 0;
+  color: inherit;
+}
+
 .pagination-nav__link {
   border: 1px solid var(--site-border-color);
   border-radius: 10px;
