@@ -1,7 +1,7 @@
-import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import {GlobExcludeDefault} from '@docusaurus/utils';
+import {accessibleGithubLight, accessibleVsDark} from './src/prismThemes';
 
 const config: Config = {
   title: 'Shakapacker',
@@ -169,8 +169,8 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} ShakaCode. Built with Docusaurus.`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.vsDark,
+      theme: accessibleGithubLight,
+      darkTheme: accessibleVsDark,
       additionalLanguages: ['ruby', 'markup-templating', 'erb', 'diff', 'haml', 'bash', 'regex', 'ignore'],
     },
   } satisfies Preset.ThemeConfig,
