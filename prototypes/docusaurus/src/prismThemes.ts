@@ -23,7 +23,7 @@ export const accessibleGithubLight: PrismTheme = {
     {
       types: ["namespace"],
       style: {
-        opacity: 0.7,
+        color: "#6e6f6b",
       },
     },
     {
@@ -73,19 +73,13 @@ export const accessibleGithubLight: PrismTheme = {
         color: "#6f42c1",
       },
     },
-    {
-      types: ["tag", "selector", "keyword"],
-      style: {
-        color: "#00009f",
-      },
-    },
   ],
 };
 
 export const accessibleVsDark: PrismTheme = {
   plain: {
     color: "#9CDCFE",
-    backgroundColor: "#1E1E1E",
+    backgroundColor: "#151f2d",
   },
   styles: [
     {
