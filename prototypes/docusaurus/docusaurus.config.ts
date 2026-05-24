@@ -6,7 +6,7 @@ import {accessibleGithubLight, accessibleVsDark} from './src/prismThemes';
 const config: Config = {
   title: 'Shakapacker',
   tagline: 'Modern JavaScript and CSS bundling for Rails applications.',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/brand/mark-transparent.svg',
 
   future: {
     v4: true,
@@ -25,6 +25,51 @@ const config: Config = {
       onBrokenMarkdownLinks: 'warn',
     },
   },
+
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/svg+xml',
+        href: '/img/brand/mark-transparent.svg',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/img/brand/icon-32.png',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/img/brand/icon-16.png',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'apple-touch-icon',
+        sizes: '256x256',
+        href: '/img/brand/icon-256.png',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'mask-icon',
+        href: '/img/brand/mark-transparent.svg',
+        color: '#E43D39',
+      },
+    },
+  ],
 
   i18n: {
     defaultLocale: 'en',
@@ -70,6 +115,7 @@ const config: Config = {
   ],
 
   themeConfig: {
+    image: 'img/brand/lockup-light.png',
     colorMode: {
       respectPrefersColorScheme: true,
     },
@@ -83,7 +129,7 @@ const config: Config = {
       title: 'Shakapacker',
       logo: {
         alt: 'Shakapacker Logo',
-        src: 'img/logo-mark.png',
+        src: 'img/brand/mark-transparent.svg',
         width: 40,
         height: 40,
       },

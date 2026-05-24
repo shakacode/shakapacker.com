@@ -61,7 +61,15 @@ function HeroSection() {
     <header className={clsx(styles.heroBanner)}>
       <div className="container">
         <p className={styles.kicker}>JavaScript Bundling for Rails</p>
-        <h1 className={styles.title}>Shakapacker</h1>
+        <h1 className={styles.title}>
+          <img
+            className={styles.titleLogo}
+            src="/img/brand/mark-transparent.svg"
+            alt=""
+            aria-hidden="true"
+          />
+          <span>Shakapacker</span>
+        </h1>
         <p className={styles.subtitle}>
           Official docs for installing, configuring, deploying, and upgrading Shakapacker in Rails
           applications, with first-class Rspack support.
