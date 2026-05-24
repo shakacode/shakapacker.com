@@ -16,7 +16,7 @@
 .title {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1rem;
   font-size: clamp(2.1rem, 5vw, 3.3rem);
   line-height: 1.15;
   margin-bottom: 0.75rem;
@@ -25,8 +25,8 @@
 .titleLogo {
   display: block;
   flex: 0 0 auto;
-  width: 3.35rem;
-  height: 3.35rem;
+  width: 5.75rem;
+  height: 5.75rem;
 }
 
 .subtitle {
@@ -325,8 +325,8 @@
   }
 
   .titleLogo {
-    width: 2.65rem;
-    height: 2.65rem;
+    width: 3.75rem;
+    height: 3.75rem;
   }
 
   .buttons {
