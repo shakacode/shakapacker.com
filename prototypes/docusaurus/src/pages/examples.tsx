@@ -6,6 +6,12 @@ import styles from './examples.module.css';
 
 const exampleApps = [
   {
+    title: 'Changelog',
+    description:
+      'Release notes for every Shakapacker version, including breaking changes and migration tips.',
+    href: '/docs/changelog',
+  },
+  {
     title: 'shakacode/shakapacker',
     description:
       'Main Shakapacker repository with source code, changelog, and issue tracking.',

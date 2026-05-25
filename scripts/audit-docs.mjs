@@ -102,11 +102,24 @@ function findBrokenRelativeMarkdownLinks(content, currentRelativePath, knownDocs
   return [...new Set(issues)];
 }
 
+function stripFrontmatter(lines) {
+  if (lines.length === 0 || lines[0].trim() !== "---") {
+    return lines;
+  }
+  for (let i = 1; i < lines.length; i++) {
+    if (lines[i].trim() === "---") {
+      return lines.slice(i + 1);
+    }
+  }
+  return lines;
+}
+
 function evaluatePage(relativePath, content, knownDocs) {
   const lines = content.split(/\r?\n/);
   const comments = [];
 
-  const firstContentLine = lines.find((line) => line.trim().length > 0) ?? "";
+  const bodyLines = stripFrontmatter(lines);
+  const firstContentLine = bodyLines.find((line) => line.trim().length > 0) ?? "";
   if (!firstContentLine.startsWith("# ")) {
     comments.push("Missing top-level `#` heading; normalize to a single H1.");
   }
