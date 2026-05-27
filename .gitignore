@@ -4,6 +4,7 @@
 **/build/
 
 content/upstream/docs/
+content/upstream/CHANGELOG.md
 prototypes/docusaurus/docs/
 
 .DS_Store

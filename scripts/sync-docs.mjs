@@ -11,6 +11,7 @@ const workspaceRoot = path.resolve(__dirname, "..");
 
 const upstreamRoot = path.join(workspaceRoot, "content", "upstream");
 const docsTarget = path.join(upstreamRoot, "docs");
+const changelogTarget = path.join(upstreamRoot, "CHANGELOG.md");
 
 async function exists(targetPath) {
   try {
@@ -88,6 +89,15 @@ async function main() {
   const docsCount = await countFiles(docsTarget);
   console.log(`Synced docs to ${docsTarget}`);
   console.log(`File count: ${docsCount}`);
+
+  const sourceChangelog = path.join(sourceRepo, "CHANGELOG.md");
+  await fs.rm(changelogTarget, { force: true });
+  if (await exists(sourceChangelog)) {
+    await fs.copyFile(sourceChangelog, changelogTarget);
+    console.log(`Synced changelog to ${changelogTarget}`);
+  } else {
+    console.warn(`No CHANGELOG.md found at ${sourceChangelog}; skipping.`);
+  }
 
   if (ephemeralClone) {
     await fs.rm(ephemeralClone, { recursive: true, force: true });

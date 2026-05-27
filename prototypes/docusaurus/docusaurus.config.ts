@@ -140,6 +140,7 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
+        {to: '/docs/changelog', label: 'Changelog', position: 'left'},
         {to: '/examples', label: 'Resources', position: 'left'},
         {to: '/pro', label: 'Support', position: 'left'},
         {
@@ -171,6 +172,7 @@ const config: Config = {
             {label: 'Deployment', to: '/docs/deployment'},
             {label: 'Rspack Migration', to: '/docs/rspack_migration_guide'},
             {label: 'Troubleshooting', to: '/docs/troubleshooting'},
+            {label: 'Changelog', to: '/docs/changelog'},
           ],
         },
         {

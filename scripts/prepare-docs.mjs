@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 function argValue(name) {
   const index = process.argv.indexOf(name);
@@ -15,7 +15,10 @@ const __dirname = path.dirname(__filename);
 const workspaceRoot = path.resolve(__dirname, "..");
 
 const target = argValue("--target");
-const sourceDocs = path.join(workspaceRoot, "content", "upstream", "docs");
+const upstreamRoot = path.join(workspaceRoot, "content", "upstream");
+const sourceDocs = path.join(upstreamRoot, "docs");
+const sourceChangelog = path.join(upstreamRoot, "CHANGELOG.md");
+const upstreamRepoBlobBase = "https://github.com/shakacode/shakapacker/blob/main";
 
 async function exists(targetPath) {
   try {
@@ -174,6 +177,76 @@ async function normalizeCodeFences(docsRoot) {
   }
 }
 
+export function rewriteChangelogLinkTarget(target) {
+  if (!target) {
+    return target;
+  }
+  if (/^(https?:|mailto:|tel:|ftp:|#|\/)/i.test(target)) {
+    return target;
+  }
+
+  const stripped = target.replace(/^\.\//, "");
+
+  if (stripped.startsWith("docs/")) {
+    const docsPath = stripped.slice("docs/".length).replace(/\.(md|mdx)(?=([?#]|$))/i, "");
+    return `/docs/${docsPath}`;
+  }
+
+  return `${upstreamRepoBlobBase}/${stripped}`;
+}
+
+export function rewriteChangelogLinks(markdown) {
+  const linkPattern = /(!?\[[^\]]*\])\(([^)]+)\)/g;
+  return markdown.replace(linkPattern, (match, label, rawTarget) => {
+    const titleMatch = rawTarget.match(/^(\S+)(\s+(?:"[^"]*"|'[^']*'))?\s*$/);
+    if (!titleMatch) {
+      return match;
+    }
+    const url = titleMatch[1];
+    const title = titleMatch[2] ?? "";
+    const rewritten = rewriteChangelogLinkTarget(url);
+    return `${label}(${rewritten}${title})`;
+  });
+}
+
+export function buildChangelogMarkdown(upstreamMarkdown) {
+  const linkFixed = rewriteChangelogLinks(upstreamMarkdown);
+  const downgraded = linkFixed.replace(/^# Versions\b/m, "## Versions");
+
+  const frontmatter = [
+    "---",
+    "title: Changelog",
+    'description: Release history for Shakapacker, synced from the upstream repository.',
+    "sidebar_position: 99",
+    "mdx:",
+    "  format: md",
+    "---",
+    ""
+  ].join("\n");
+
+  const intro = [
+    "# Changelog",
+    "",
+    "Release notes for [Shakapacker](https://github.com/shakacode/shakapacker), synced from the upstream `CHANGELOG.md`.",
+    ""
+  ].join("\n");
+
+  return `${frontmatter}\n${intro}\n${downgraded.trimEnd()}\n`;
+}
+
+async function writeChangelog(docsRoot) {
+  if (!(await exists(sourceChangelog))) {
+    console.warn(`No upstream CHANGELOG.md at ${sourceChangelog}; skipping changelog page.`);
+    return;
+  }
+
+  const raw = await fs.readFile(sourceChangelog, "utf8");
+  const rendered = buildChangelogMarkdown(raw);
+  const outputPath = path.join(docsRoot, "changelog.md");
+  await fs.writeFile(outputPath, rendered, "utf8");
+  console.log(`Generated changelog at ${outputPath}`);
+}
+
 async function prepareDocusaurus() {
   const siteRoot = path.join(workspaceRoot, "prototypes", "docusaurus");
   const docsRoot = path.join(siteRoot, "docs");
@@ -188,6 +261,7 @@ async function prepareDocusaurus() {
   await fs.cp(sourceDocs, docsRoot, { recursive: true });
   await writeDocsHome(docsRoot);
   await normalizeCodeFences(docsRoot);
+  await writeChangelog(docsRoot);
 
   console.log(`Prepared docusaurus docs from ${sourceDocs}`);
 }
@@ -200,7 +274,9 @@ async function main() {
   await prepareDocusaurus();
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+}
