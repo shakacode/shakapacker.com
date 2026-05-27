@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 function argValue(name) {
   const index = process.argv.indexOf(name);
@@ -177,7 +177,7 @@ async function normalizeCodeFences(docsRoot) {
   }
 }
 
-function rewriteChangelogLinkTarget(target) {
+export function rewriteChangelogLinkTarget(target) {
   if (!target) {
     return target;
   }
@@ -188,13 +188,14 @@ function rewriteChangelogLinkTarget(target) {
   const stripped = target.replace(/^\.\//, "");
 
   if (stripped.startsWith("docs/")) {
-    return `./${stripped.slice("docs/".length)}`;
+    const docsPath = stripped.slice("docs/".length).replace(/\.(md|mdx)(?=([?#]|$))/i, "");
+    return `/docs/${docsPath}`;
   }
 
   return `${upstreamRepoBlobBase}/${stripped}`;
 }
 
-function rewriteChangelogLinks(markdown) {
+export function rewriteChangelogLinks(markdown) {
   const linkPattern = /(!?\[[^\]]*\])\(([^)]+)\)/g;
   return markdown.replace(linkPattern, (match, label, rawTarget) => {
     const titleMatch = rawTarget.match(/^(\S+)(\s+(?:"[^"]*"|'[^']*'))?\s*$/);
@@ -208,7 +209,7 @@ function rewriteChangelogLinks(markdown) {
   });
 }
 
-function buildChangelogMarkdown(upstreamMarkdown) {
+export function buildChangelogMarkdown(upstreamMarkdown) {
   const linkFixed = rewriteChangelogLinks(upstreamMarkdown);
   const downgraded = linkFixed.replace(/^# Versions\b/m, "## Versions");
 
@@ -217,6 +218,8 @@ function buildChangelogMarkdown(upstreamMarkdown) {
     "title: Changelog",
     'description: Release history for Shakapacker, synced from the upstream repository.',
     "sidebar_position: 99",
+    "mdx:",
+    "  format: md",
     "---",
     ""
   ].join("\n");
@@ -271,7 +274,9 @@ async function main() {
   await prepareDocusaurus();
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+}
