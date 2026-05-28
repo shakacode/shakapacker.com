@@ -197,6 +197,27 @@ const config: Config = {
           ],
         },
         {
+          title: 'Packages',
+          items: [
+            {
+              label: 'shakapacker',
+              href: 'https://www.npmjs.com/package/shakapacker',
+            },
+            {
+              label: 'shakapacker-rspack',
+              href: 'https://www.npmjs.com/package/shakapacker-rspack',
+            },
+            {
+              label: 'shakapacker-webpack',
+              href: 'https://www.npmjs.com/package/shakapacker-webpack',
+            },
+            {
+              label: 'RubyGems shakapacker',
+              href: 'https://rubygems.org/gems/shakapacker',
+            },
+          ],
+        },
+        {
           title: 'More',
           items: [
             {

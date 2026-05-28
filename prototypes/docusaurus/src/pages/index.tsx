@@ -10,6 +10,7 @@ const quickStartSteps = [
     title: 'Install Gem',
     command: 'bundle add shakapacker',
     docsPath: '/docs/configuration',
+    packageHref: 'https://rubygems.org/gems/shakapacker',
   },
   {
     title: 'Install Files',
@@ -102,6 +103,13 @@ function QuickStartSection() {
               <code className={styles.inlineCode}>{step.command}</code>
               <p>
                 <Link to={step.docsPath}>Open guide</Link>
+                {step.packageHref ? (
+                  <>
+                    {' '}
+                    <span aria-hidden="true">/</span>{' '}
+                    <Link to={step.packageHref}>RubyGems</Link>
+                  </>
+                ) : null}
               </p>
             </article>
           ))}

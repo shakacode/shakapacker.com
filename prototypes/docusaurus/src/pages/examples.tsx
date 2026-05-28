@@ -31,6 +31,29 @@ const exampleApps = [
   },
 ];
 
+const packageReferences = [
+  {
+    title: 'shakapacker',
+    description: 'Core npm package for Shakapacker JavaScript helpers and bundler configuration.',
+    href: 'https://www.npmjs.com/package/shakapacker',
+  },
+  {
+    title: 'shakapacker-rspack',
+    description: 'Rspack-specific supplemental npm package for Shakapacker installations.',
+    href: 'https://www.npmjs.com/package/shakapacker-rspack',
+  },
+  {
+    title: 'shakapacker-webpack',
+    description: 'Webpack-specific supplemental npm package for Shakapacker installations.',
+    href: 'https://www.npmjs.com/package/shakapacker-webpack',
+  },
+  {
+    title: 'RubyGems shakapacker',
+    description: 'Ruby gem package for Rails integration, installers, view helpers, and releases.',
+    href: 'https://rubygems.org/gems/shakapacker',
+  },
+];
+
 export default function ExamplesPage(): ReactNode {
   return (
     <Layout title="Resources" description="Shakapacker repositories, guides, and reference material">
@@ -48,6 +71,18 @@ export default function ExamplesPage(): ReactNode {
                 <p>{app.description}</p>
                 <p>
                   <Link to={app.href}>Open resource</Link>
+                </p>
+              </article>
+            ))}
+          </div>
+          <h2 className={styles.sectionHeading}>Package References</h2>
+          <div className={styles.grid}>
+            {packageReferences.map((reference) => (
+              <article className={styles.card} key={reference.title}>
+                <h2>{reference.title}</h2>
+                <p>{reference.description}</p>
+                <p>
+                  <Link to={reference.href}>Open package</Link>
                 </p>
               </article>
             ))}
