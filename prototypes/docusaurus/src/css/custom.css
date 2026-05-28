@@ -193,6 +193,26 @@ body {
   color: var(--ifm-color-content-secondary);
 }
 
+.package-version-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.package-version-inline {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--site-border-color);
+  border-radius: 6px;
+  background: var(--site-surface-1);
+  color: var(--ifm-color-content-secondary);
+  padding: 0.08rem 0.36rem;
+  font-size: 0.72em;
+  font-weight: 620;
+  line-height: 1.25;
+}
+
 .markdown h1,
 .markdown h2,
 .markdown h3 {

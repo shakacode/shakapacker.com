@@ -36,21 +36,29 @@ const packageReferences = [
     title: 'shakapacker',
     description: 'Core npm package for Shakapacker JavaScript helpers and bundler configuration.',
     href: 'https://www.npmjs.com/package/shakapacker',
+    registry: 'npm',
+    packageName: 'shakapacker',
   },
   {
     title: 'shakapacker-rspack',
     description: 'Rspack-specific supplemental npm package for Shakapacker installations.',
     href: 'https://www.npmjs.com/package/shakapacker-rspack',
+    registry: 'npm',
+    packageName: 'shakapacker-rspack',
   },
   {
     title: 'shakapacker-webpack',
     description: 'Webpack-specific supplemental npm package for Shakapacker installations.',
     href: 'https://www.npmjs.com/package/shakapacker-webpack',
+    registry: 'npm',
+    packageName: 'shakapacker-webpack',
   },
   {
     title: 'RubyGems shakapacker',
     description: 'Ruby gem package for Rails integration, installers, view helpers, and releases.',
     href: 'https://rubygems.org/gems/shakapacker',
+    registry: 'rubygems',
+    packageName: 'shakapacker',
   },
 ];
 
@@ -79,7 +87,16 @@ export default function ExamplesPage(): ReactNode {
           <div className={styles.grid}>
             {packageReferences.map((reference) => (
               <article className={styles.card} key={reference.title}>
-                <h2>{reference.title}</h2>
+                <h2 className={styles.packageTitle}>
+                  <span>{reference.title}</span>
+                  <span
+                    className={styles.versionBadge}
+                    data-package-version-registry={reference.registry}
+                    data-package-version-name={reference.packageName}
+                    data-package-version-output>
+                    loading version
+                  </span>
+                </h2>
                 <p>{reference.description}</p>
                 <p>
                   <Link to={reference.href}>Open package</Link>

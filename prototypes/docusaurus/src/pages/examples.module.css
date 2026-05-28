@@ -37,6 +37,27 @@
   font-size: 1.05rem;
 }
 
+.packageTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.versionBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.35rem;
+  border: 1px solid var(--site-border-color);
+  border-radius: 6px;
+  background: var(--site-surface-1);
+  color: var(--ifm-color-content-secondary);
+  padding: 0.12rem 0.42rem;
+  font-size: 0.72rem;
+  font-weight: 620;
+  line-height: 1.2;
+}
+
 .conversionBanner {
   margin-top: 1.4rem;
   display: grid;

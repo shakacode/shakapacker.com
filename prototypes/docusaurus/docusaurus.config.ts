@@ -19,6 +19,7 @@ const config: Config = {
   projectName: 'shakapacker.com',
 
   onBrokenLinks: 'warn',
+  clientModules: ['./src/client/packageVersions.ts'],
   markdown: {
     format: 'detect',
     hooks: {
@@ -202,18 +203,30 @@ const config: Config = {
             {
               label: 'shakapacker',
               href: 'https://www.npmjs.com/package/shakapacker',
+              className: 'package-version-link',
+              'data-package-version-registry': 'npm',
+              'data-package-version-name': 'shakapacker',
             },
             {
               label: 'shakapacker-rspack',
               href: 'https://www.npmjs.com/package/shakapacker-rspack',
+              className: 'package-version-link',
+              'data-package-version-registry': 'npm',
+              'data-package-version-name': 'shakapacker-rspack',
             },
             {
               label: 'shakapacker-webpack',
               href: 'https://www.npmjs.com/package/shakapacker-webpack',
+              className: 'package-version-link',
+              'data-package-version-registry': 'npm',
+              'data-package-version-name': 'shakapacker-webpack',
             },
             {
               label: 'RubyGems shakapacker',
               href: 'https://rubygems.org/gems/shakapacker',
+              className: 'package-version-link',
+              'data-package-version-registry': 'rubygems',
+              'data-package-version-name': 'shakapacker',
             },
           ],
         },
