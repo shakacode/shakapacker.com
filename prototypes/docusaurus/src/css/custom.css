@@ -195,8 +195,8 @@ body {
 
 .package-version-link {
   display: inline-flex;
-  align-items: baseline;
-  gap: 0.3rem;
+  align-items: center;
+  gap: 0.4rem;
   flex-wrap: wrap;
 }
 
@@ -204,13 +204,16 @@ body {
   display: inline-flex;
   align-items: center;
   border: 1px solid var(--site-border-color);
-  border-radius: 6px;
+  border-radius: 999px;
   background: var(--site-surface-1);
   color: var(--ifm-color-content-secondary);
-  padding: 0.08rem 0.36rem;
-  font-size: 0.72em;
-  font-weight: 620;
-  line-height: 1.25;
+  padding: 0.05rem 0.42rem;
+  font-size: 0.7em;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .markdown h1,
