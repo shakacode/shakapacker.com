@@ -259,8 +259,8 @@ function ExpertHelpSection() {
 export default function Home(): ReactNode {
   return (
     <Layout
-      title="Shakapacker"
-      description="Official Shakapacker documentation, guides, and support resources.">
+      title="Modern JavaScript & CSS Bundling for Rails"
+      description="Shakapacker brings webpack and Rspack-powered JavaScript and CSS bundling to Ruby on Rails — official docs, installation guides, and Rspack migration resources.">
       <HeroSection />
       <main>
         <QuickStartSection />

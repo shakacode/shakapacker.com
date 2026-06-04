@@ -3,6 +3,46 @@ import type * as Preset from '@docusaurus/preset-classic';
 import {GlobExcludeDefault} from '@docusaurus/utils';
 import {accessibleGithubLight, accessibleVsDark} from './src/prismThemes';
 
+const siteUrl = 'https://shakapacker.com';
+const siteDescription =
+  'Modern JavaScript and CSS bundling for Rails applications, powered by webpack or Rspack.';
+
+// Schema.org structured data so search engines understand the project, its
+// publisher, and the site. Emitted once into <head> via headTags below.
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://www.shakacode.com/#organization',
+      name: 'ShakaCode',
+      url: 'https://www.shakacode.com',
+      logo: `${siteUrl}/img/brand/icon-512.png`,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: 'Shakapacker',
+      description: siteDescription,
+      publisher: {'@id': 'https://www.shakacode.com/#organization'},
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Shakapacker',
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'Cross-platform',
+      description: siteDescription,
+      url: siteUrl,
+      softwareHelp: `${siteUrl}/docs`,
+      codeRepository: 'https://github.com/shakacode/shakapacker',
+      license: 'https://github.com/shakacode/shakapacker/blob/main/LICENSE.md',
+      author: {'@id': 'https://www.shakacode.com/#organization'},
+      offers: {'@type': 'Offer', price: '0', priceCurrency: 'USD'},
+    },
+  ],
+};
+
 const config: Config = {
   title: 'Shakapacker',
   tagline: 'Modern JavaScript and CSS bundling for Rails applications.',
@@ -12,7 +52,7 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://shakapacker.com',
+  url: siteUrl,
   baseUrl: '/',
 
   organizationName: 'shakacode',
@@ -70,6 +110,13 @@ const config: Config = {
         color: '#E43D39',
       },
     },
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: JSON.stringify(structuredData),
+    },
   ],
 
   i18n: {
@@ -108,6 +155,12 @@ const config: Config = {
           },
         },
         blog: false,
+        sitemap: {
+          lastmod: 'date',
+          changefreq: 'weekly',
+          priority: 0.5,
+          filename: 'sitemap.xml',
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -117,6 +170,11 @@ const config: Config = {
 
   themeConfig: {
     image: 'img/brand/lockup-light.png',
+    metadata: [
+      {name: 'description', content: siteDescription},
+      {property: 'og:type', content: 'website'},
+      {property: 'og:site_name', content: 'Shakapacker'},
+    ],
     colorMode: {
       respectPrefersColorScheme: true,
     },
