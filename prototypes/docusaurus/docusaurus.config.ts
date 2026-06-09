@@ -169,11 +169,19 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/brand/lockup-light.png',
+    // Purpose-built 1200x630 Open Graph / Twitter card (see img/brand/og-card.svg).
+    image: 'img/brand/og-card.png',
     metadata: [
       {name: 'description', content: siteDescription},
       {property: 'og:type', content: 'website'},
       {property: 'og:site_name', content: 'Shakapacker'},
+      {property: 'og:image:width', content: '1200'},
+      {property: 'og:image:height', content: '630'},
+      {
+        property: 'og:image:alt',
+        content:
+          'Shakapacker — modern JavaScript and CSS bundling for Rails, powered by webpack or Rspack',
+      },
     ],
     colorMode: {
       respectPrefersColorScheme: true,
