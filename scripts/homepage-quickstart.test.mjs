@@ -5,16 +5,19 @@ import test from "node:test";
 const homePagePath = "prototypes/docusaurus/src/pages/index.tsx";
 
 // Asserts that the quick-start step with the given title links to the expected
-// docs route. Binds the title to its nearest following `docsPath` (each step
-// declares exactly one), so the check is independent of indentation/formatting.
+// docs route. Captures the step's own `docsPath` -- the first one after its
+// title (each step declares exactly one) -- then compares the value, so a wrong
+// path on one card can't pass by matching a later card's correct path. Reading
+// the captured value also keeps the check independent of indentation/formatting.
 function assertStepDestination(source, title, expectedDocsPath) {
-  const pattern = new RegExp(
-    `title: '${title}',[\\s\\S]*?docsPath: '${expectedDocsPath.replace(/\//g, "\\/")}'`
+  const match = source.match(
+    new RegExp(`title: '${title}',[\\s\\S]*?docsPath: '([^']*)'`)
   );
-  assert.match(
-    source,
-    pattern,
-    `expected the "${title}" quick-start card to link to ${expectedDocsPath}`
+  assert.ok(match, `expected a quick-start card titled "${title}" with a docsPath`);
+  assert.equal(
+    match[1],
+    expectedDocsPath,
+    `expected the "${title}" quick-start card to link to ${expectedDocsPath}, got ${match[1]}`
   );
 }
 
