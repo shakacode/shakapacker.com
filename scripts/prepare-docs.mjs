@@ -51,28 +51,30 @@ function titleFromPath(relativePath) {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-async function writeDocsHome(docsRoot) {
-  const preferred = [
-    "configuration.md",
-    "deployment.md",
-    "api-reference.md",
-    "troubleshooting.md",
-    "common-upgrades.md",
-    "v9_upgrade.md",
-    "rspack_migration_guide.md",
-    "typescript.md"
-  ];
+// Guides surfaced in the generated docs overview, in display order. Installation
+// leads so a new user landing on /docs sees the entry point before configuration.
+const DOCS_HOME_PREFERRED = [
+  "installation.md",
+  "configuration.md",
+  "deployment.md",
+  "api-reference.md",
+  "troubleshooting.md",
+  "common-upgrades.md",
+  "v9_upgrade.md",
+  "rspack_migration_guide.md",
+  "typescript.md"
+];
 
-  const links = [];
-  for (const relativePath of preferred) {
-    const absolutePath = path.join(docsRoot, relativePath);
-    if (!(await exists(absolutePath))) {
-      continue;
-    }
-    links.push(`- [${titleFromPath(relativePath)}](./${relativePath})`);
-  }
+// Renders the docs overview (README.md) Key Guides list. `presentDocs` is the
+// subset of `preferred` that exists in the synced tree; the rendered order
+// follows `preferred`, so missing guides are simply skipped without reordering.
+export function buildDocsHomeMarkdown(presentDocs, preferred = DOCS_HOME_PREFERRED) {
+  const present = new Set(presentDocs);
+  const links = preferred
+    .filter((relativePath) => present.has(relativePath))
+    .map((relativePath) => `- [${titleFromPath(relativePath)}](./${relativePath})`);
 
-  const markdown = `# Shakapacker Documentation
+  return `# Shakapacker Documentation
 
 Welcome to the official Shakapacker documentation.
 
@@ -82,8 +84,21 @@ Canonical source lives in [shakacode/shakapacker](https://github.com/shakacode/s
 
 ${links.join("\n")}
 `;
+}
 
-  await fs.writeFile(path.join(docsRoot, "README.md"), markdown, "utf8");
+async function writeDocsHome(docsRoot) {
+  const presentDocs = [];
+  for (const relativePath of DOCS_HOME_PREFERRED) {
+    if (await exists(path.join(docsRoot, relativePath))) {
+      presentDocs.push(relativePath);
+    }
+  }
+
+  await fs.writeFile(
+    path.join(docsRoot, "README.md"),
+    buildDocsHomeMarkdown(presentDocs),
+    "utf8"
+  );
 }
 
 async function walkFiles(dir, callback, relativePrefix = "") {
