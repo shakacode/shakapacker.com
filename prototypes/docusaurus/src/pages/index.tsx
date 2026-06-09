@@ -85,7 +85,7 @@ const comparisonRows = [
   },
   {
     option: 'jsbundling-rails',
-    cells: ['esbuild / rollup / bun', 'minimal', '✓', 'partial', 'limited', '✓ (Propshaft)', 'Simple modern JS'],
+    cells: ['esbuild / rollup / bun', 'minimal', '✓', '✗', 'limited', '✓ (Propshaft)', 'Simple modern JS'],
   },
   {
     option: 'Vite Ruby',
