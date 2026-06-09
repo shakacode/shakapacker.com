@@ -20,6 +20,10 @@ const sourceDocs = path.join(upstreamRoot, "docs");
 const sourceChangelog = path.join(upstreamRoot, "CHANGELOG.md");
 const upstreamRepoBlobBase = "https://github.com/shakacode/shakapacker/blob/main";
 
+function toPosix(filePath) {
+  return filePath.split(path.sep).join("/");
+}
+
 async function exists(targetPath) {
   try {
     await fs.access(targetPath);
@@ -195,7 +199,7 @@ export function rewriteChangelogLinkTarget(target) {
   return `${upstreamRepoBlobBase}/${stripped}`;
 }
 
-export function rewriteChangelogLinks(markdown) {
+function replaceMarkdownLinkTargets(markdown, mapTarget) {
   const linkPattern = /(!?\[[^\]]*\])\(([^)]+)\)/g;
   return markdown.replace(linkPattern, (match, label, rawTarget) => {
     const titleMatch = rawTarget.match(/^(\S+)(\s+(?:"[^"]*"|'[^']*'))?\s*$/);
@@ -204,9 +208,79 @@ export function rewriteChangelogLinks(markdown) {
     }
     const url = titleMatch[1];
     const title = titleMatch[2] ?? "";
-    const rewritten = rewriteChangelogLinkTarget(url);
-    return `${label}(${rewritten}${title})`;
+    return `${label}(${mapTarget(url)}${title})`;
   });
+}
+
+export function rewriteChangelogLinks(markdown) {
+  return replaceMarkdownLinkTargets(markdown, rewriteChangelogLinkTarget);
+}
+
+// Resolves a relative link found inside a synced doc against that doc's location in the
+// upstream `docs/` tree. Links that stay within `docs/` are valid Docusaurus routes and are
+// left untouched; links that escape the tree (e.g. `../README.md`, `../lib/...`) point at repo
+// files that aren't published on the site, so they are rewritten to absolute GitHub URLs.
+export function rewriteDocLinkTarget(rawTarget, docRelativePath) {
+  if (!rawTarget) {
+    return rawTarget;
+  }
+  // External, root-absolute, protocol, or pure-anchor targets are already resolvable.
+  if (/^(https?:|mailto:|tel:|ftp:|#|\/)/i.test(rawTarget)) {
+    return rawTarget;
+  }
+
+  // Resolve only the path, preserving any trailing `?query` / `#fragment`.
+  const suffixIndex = rawTarget.search(/[?#]/);
+  const pathPart = suffixIndex === -1 ? rawTarget : rawTarget.slice(0, suffixIndex);
+  const suffix = suffixIndex === -1 ? "" : rawTarget.slice(suffixIndex);
+  if (pathPart === "") {
+    return rawTarget;
+  }
+
+  const docDir = path.posix.dirname(path.posix.join("docs", toPosix(docRelativePath)));
+  const resolved = path.posix.normalize(path.posix.join(docDir, pathPart));
+
+  // Stays inside the published docs tree: leave the relative link for Docusaurus to resolve.
+  if (resolved === "docs" || resolved.startsWith("docs/")) {
+    return rawTarget;
+  }
+
+  // Escaped above the repo root: nothing sensible to point at, so leave it unchanged.
+  if (resolved.startsWith("..")) {
+    return rawTarget;
+  }
+
+  return `${upstreamRepoBlobBase}/${resolved}${suffix}`;
+}
+
+export function rewriteDocLinks(markdown, docRelativePath) {
+  return replaceMarkdownLinkTargets(markdown, (target) =>
+    rewriteDocLinkTarget(target, docRelativePath)
+  );
+}
+
+// Upstream docs occasionally link to anchors whose headings have since been renamed. Docusaurus
+// flags these as broken anchors. Until each is fixed upstream, repoint the known-stale anchors to
+// the current heading during the prepare step. Keyed by the doc's path within `docs/`.
+const KNOWN_ANCHOR_CORRECTIONS = {
+  "rspack_migration_guide.md": [
+    [
+      "./troubleshooting.md#exporting-webpack--rspack-configuration",
+      "./troubleshooting.md#debugging-your-webpack-config"
+    ]
+  ]
+};
+
+export function correctKnownBrokenAnchors(markdown, docRelativePath) {
+  const corrections = KNOWN_ANCHOR_CORRECTIONS[toPosix(docRelativePath)];
+  if (!corrections) {
+    return markdown;
+  }
+  let result = markdown;
+  for (const [from, to] of corrections) {
+    result = result.replaceAll(from, to);
+  }
+  return result;
 }
 
 export function buildChangelogMarkdown(upstreamMarkdown) {
@@ -247,6 +321,28 @@ async function writeChangelog(docsRoot) {
   console.log(`Generated changelog at ${outputPath}`);
 }
 
+async function rewriteRelativeDocLinks(docsRoot) {
+  let filesUpdated = 0;
+
+  await walkFiles(docsRoot, async (absoluteFile, relativeFile) => {
+    if (!relativeFile.endsWith(".md") && !relativeFile.endsWith(".mdx")) {
+      return;
+    }
+
+    const original = await fs.readFile(absoluteFile, "utf8");
+    const linkRewritten = rewriteDocLinks(original, relativeFile);
+    const updated = correctKnownBrokenAnchors(linkRewritten, relativeFile);
+    if (updated !== original) {
+      await fs.writeFile(absoluteFile, updated, "utf8");
+      filesUpdated += 1;
+    }
+  });
+
+  if (filesUpdated > 0) {
+    console.log(`Rewrote out-of-tree doc links in ${filesUpdated} files`);
+  }
+}
+
 async function prepareDocusaurus() {
   const siteRoot = path.join(workspaceRoot, "prototypes", "docusaurus");
   const docsRoot = path.join(siteRoot, "docs");
@@ -260,6 +356,7 @@ async function prepareDocusaurus() {
   await fs.mkdir(docsRoot, { recursive: true });
   await fs.cp(sourceDocs, docsRoot, { recursive: true });
   await writeDocsHome(docsRoot);
+  await rewriteRelativeDocLinks(docsRoot);
   await normalizeCodeFences(docsRoot);
   await writeChangelog(docsRoot);
 
