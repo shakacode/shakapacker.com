@@ -3,8 +3,11 @@ import test from "node:test";
 
 import {
   buildChangelogMarkdown,
+  correctKnownBrokenAnchors,
   rewriteChangelogLinkTarget,
-  rewriteChangelogLinks
+  rewriteChangelogLinks,
+  rewriteDocLinkTarget,
+  rewriteDocLinks
 } from "./prepare-docs.mjs";
 
 test("changelog markdown injects Docusaurus frontmatter with CommonMark parsing", () => {
@@ -58,4 +61,87 @@ test("changelog links rewrite markdown links while preserving external links and
   );
   assert.match(updated, /\[GitHub PR\]\(https:\/\/github\.com\/shakacode\/shakapacker\/pull\/1096\)/);
   assert.doesNotMatch(updated, /\.md[)#"]/);
+});
+
+test("doc links that escape the docs tree are sent to upstream GitHub", () => {
+  assert.equal(
+    rewriteDocLinkTarget("../lib/shakapacker/helper.rb", "api-reference.md"),
+    "https://github.com/shakacode/shakapacker/blob/main/lib/shakapacker/helper.rb"
+  );
+  assert.equal(
+    rewriteDocLinkTarget("../../packages/shakapacker-rspack/README.md", "migration/v10.1-supplemental-packages.md"),
+    "https://github.com/shakacode/shakapacker/blob/main/packages/shakapacker-rspack/README.md"
+  );
+  assert.equal(
+    rewriteDocLinkTarget("../package.json", "installation.md"),
+    "https://github.com/shakacode/shakapacker/blob/main/package.json"
+  );
+});
+
+test("doc links preserve anchors and query strings when sent to GitHub", () => {
+  assert.equal(
+    rewriteDocLinkTarget("../README.md#installation", "v8_upgrade.md"),
+    "https://github.com/shakacode/shakapacker/blob/main/README.md#installation"
+  );
+});
+
+test("doc links that stay inside the docs tree are left untouched", () => {
+  assert.equal(rewriteDocLinkTarget("./configuration.md", "api-reference.md"), "./configuration.md");
+  assert.equal(
+    rewriteDocLinkTarget("./troubleshooting.md#flash-of-unstyled-content-fouc", "rspack_migration_guide.md"),
+    "./troubleshooting.md#flash-of-unstyled-content-fouc"
+  );
+  assert.equal(
+    rewriteDocLinkTarget("../dependency-strategy.md", "blog/2026-05-10-shakapacker-10-1-supplemental-packages.md"),
+    "../dependency-strategy.md"
+  );
+  assert.equal(rewriteDocLinkTarget("../docs/v7_upgrade.md", "v8_upgrade.md"), "../docs/v7_upgrade.md");
+});
+
+test("doc links leave external, absolute, and anchor-only targets untouched", () => {
+  assert.equal(
+    rewriteDocLinkTarget("https://github.com/shakacode/shakapacker", "rspack.md"),
+    "https://github.com/shakacode/shakapacker"
+  );
+  assert.equal(rewriteDocLinkTarget("/docs/troubleshooting", "rspack.md"), "/docs/troubleshooting");
+  assert.equal(rewriteDocLinkTarget("#section", "rspack.md"), "#section");
+  assert.equal(rewriteDocLinkTarget("mailto:team@example.com", "rspack.md"), "mailto:team@example.com");
+});
+
+test("doc link rewriting preserves labels, titles, and in-tree links across a document", () => {
+  const source = [
+    "[helper.rb](../lib/shakapacker/helper.rb)",
+    "[Configuration](./configuration.md)",
+    "[README](../README.md \"project readme\")",
+    "[GitHub](https://github.com/shakacode/shakapacker)"
+  ].join("\n");
+
+  const updated = rewriteDocLinks(source, "api-reference.md");
+
+  assert.match(
+    updated,
+    /\[helper\.rb\]\(https:\/\/github\.com\/shakacode\/shakapacker\/blob\/main\/lib\/shakapacker\/helper\.rb\)/
+  );
+  assert.match(updated, /\[Configuration\]\(\.\/configuration\.md\)/);
+  assert.match(
+    updated,
+    /\[README\]\(https:\/\/github\.com\/shakacode\/shakapacker\/blob\/main\/README\.md "project readme"\)/
+  );
+  assert.match(updated, /\[GitHub\]\(https:\/\/github\.com\/shakacode\/shakapacker\)/);
+});
+
+test("known broken anchor in rspack migration guide is repointed to the current heading", () => {
+  const source =
+    "See the [Troubleshooting Guide](./troubleshooting.md#exporting-webpack--rspack-configuration) for more details.";
+
+  const updated = correctKnownBrokenAnchors(source, "rspack_migration_guide.md");
+
+  assert.match(updated, /\.\/troubleshooting\.md#debugging-your-webpack-config/);
+  assert.doesNotMatch(updated, /exporting-webpack--rspack-configuration/);
+});
+
+test("anchor corrections are scoped to the file that owns them", () => {
+  const source = "[x](./troubleshooting.md#exporting-webpack--rspack-configuration)";
+
+  assert.equal(correctKnownBrokenAnchors(source, "some-other-doc.md"), source);
 });
