@@ -9,7 +9,7 @@ const quickStartSteps = [
   {
     title: 'Install Gem',
     command: 'bundle add shakapacker',
-    docsPath: '/docs/configuration',
+    docsPath: '/docs/installation',
     packageHref: 'https://rubygems.org/gems/shakapacker',
     packageRegistry: 'rubygems',
     packageName: 'shakapacker',
@@ -17,7 +17,7 @@ const quickStartSteps = [
   {
     title: 'Install Files',
     command: 'bin/rails shakapacker:install',
-    docsPath: '/docs/configuration',
+    docsPath: '/docs/installation',
   },
   {
     title: 'Deploy',

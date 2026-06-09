@@ -2,6 +2,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import {GlobExcludeDefault} from '@docusaurus/utils';
 import {accessibleGithubLight, accessibleVsDark} from './src/prismThemes';
+import {resolveDocsEditUrl} from '../../scripts/docs-edit-url.mjs';
 
 const siteUrl = 'https://shakapacker.com';
 const siteDescription =
@@ -146,13 +147,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           routeBasePath: 'docs',
           exclude: [...GlobExcludeDefault, '**/planning/**'],
-          editUrl: ({docPath}) => {
-            if (docPath === 'README.md') {
-              return undefined;
-            }
-            const root = 'https://github.com/shakacode/shakapacker/tree/main/docs/';
-            return `${root}${docPath}`;
-          },
+          editUrl: ({docPath}) => resolveDocsEditUrl(docPath),
         },
         blog: false,
         sitemap: {
