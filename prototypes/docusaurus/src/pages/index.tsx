@@ -59,6 +59,60 @@ const rspackBenefits = [
   },
 ];
 
+const comparisonColumns = [
+  'Option',
+  'Build step',
+  'npm + loaders',
+  'JSX / TS',
+  'HMR',
+  'Code splitting',
+  'Rails manifest + helpers',
+  'Best for',
+];
+
+const comparisonRows = [
+  {
+    option: 'Sprockets',
+    cells: ['none (concatenate)', '✗', '✗', '✗', '✗', '✓ (legacy)', 'Legacy apps, CSS / images'],
+  },
+  {
+    option: 'Propshaft',
+    cells: ['none (digest only)', '✗', '✗', '✗', '✗', '✓', 'Modern digesting; pair with a bundler'],
+  },
+  {
+    option: 'importmap-rails',
+    cells: ['none', '✗', '✗', '✗', '✗', '✓ (Propshaft)', 'No-build Hotwire'],
+  },
+  {
+    option: 'jsbundling-rails',
+    cells: ['esbuild / rollup / bun', 'minimal', '✓', 'partial', 'limited', '✓ (Propshaft)', 'Simple modern JS'],
+  },
+  {
+    option: 'Vite Ruby',
+    cells: ['Vite', 'Vite ecosystem', '✓', '✓', '✓', 'own pipeline', 'Teams wanting Vite DX'],
+  },
+  {
+    option: 'Shakapacker + Rspack',
+    highlight: true,
+    cells: [
+      'webpack or Rspack',
+      'full ecosystem',
+      '✓ SWC / Babel / esbuild',
+      '✓',
+      '✓',
+      '✓ native',
+      'Complex / React / TS at scale',
+    ],
+  },
+];
+
+function comparisonCellClass(value: string): string | undefined {
+  const trimmed = value.trim();
+  if (trimmed.startsWith('✓')) return styles.compareYes;
+  if (trimmed.startsWith('✗')) return styles.compareNo;
+  return undefined;
+}
+
 function HeroSection() {
   return (
     <header className={clsx(styles.heroBanner)}>
@@ -213,6 +267,49 @@ function RspackSection() {
   );
 }
 
+function ComparisonSection() {
+  return (
+    <section className={styles.section}>
+      <div className="container">
+        <h2>How Shakapacker Compares</h2>
+        <p className={styles.compareCaption}>
+          Sprockets and Propshaft are Rails&rsquo; asset-digesting layer — they fingerprint assets
+          but don&rsquo;t bundle JavaScript. importmap-rails, jsbundling-rails, Vite Ruby, and
+          Shakapacker are how modern JS actually reaches the browser.
+        </p>
+        <div className={styles.compareScroll}>
+          <table className={styles.compareTable}>
+            <thead>
+              <tr>
+                {comparisonColumns.map((column) => (
+                  <th key={column} scope="col">
+                    {column}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonRows.map((row) => (
+                <tr key={row.option} className={row.highlight ? styles.compareHighlight : undefined}>
+                  <th scope="row">{row.option}</th>
+                  {row.cells.map((cell, index) => (
+                    <td key={comparisonColumns[index + 1]} className={comparisonCellClass(cell)}>
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className={styles.compareFootnote}>
+          <Link to="/docs/transpiler-performance">Full comparison &amp; benchmarks →</Link>
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function ArchitectureSection() {
   return (
     <section className={styles.section}>
@@ -265,6 +362,7 @@ export default function Home(): ReactNode {
       <main>
         <QuickStartSection />
         <RspackSection />
+        <ComparisonSection />
         <HighlightsSection />
         <ArchitectureSection />
         <ExpertHelpSection />
