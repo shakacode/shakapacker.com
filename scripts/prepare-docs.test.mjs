@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   buildChangelogMarkdown,
+  buildDocsHomeMarkdown,
   correctKnownBrokenAnchors,
   rewriteChangelogLinkTarget,
   rewriteChangelogLinks,
@@ -144,4 +145,30 @@ test("anchor corrections are scoped to the file that owns them", () => {
   const source = "[x](./troubleshooting.md#exporting-webpack--rspack-configuration)";
 
   assert.equal(correctKnownBrokenAnchors(source, "some-other-doc.md"), source);
+});
+
+test("docs overview leads with the installation guide", () => {
+  const markdown = buildDocsHomeMarkdown([
+    "installation.md",
+    "configuration.md",
+    "deployment.md"
+  ]);
+
+  // Installation is the first Key Guide so a new user landing on /docs sees the
+  // entry point before configuration.
+  assert.match(
+    markdown,
+    /## Key Guides\n\n- \[Installation\]\(\.\/installation\.md\)/
+  );
+  assert.ok(
+    markdown.indexOf("installation.md") < markdown.indexOf("configuration.md"),
+    "installation should be listed before configuration"
+  );
+});
+
+test("docs overview omits guides absent from the synced tree", () => {
+  const markdown = buildDocsHomeMarkdown(["installation.md"]);
+
+  assert.match(markdown, /- \[Installation\]\(\.\/installation\.md\)/);
+  assert.doesNotMatch(markdown, /configuration\.md/);
 });
