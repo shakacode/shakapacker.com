@@ -303,7 +303,7 @@ function ComparisonSection() {
           </table>
         </div>
         <p className={styles.compareFootnote}>
-          <Link to="/docs/transpiler-performance">Full comparison &amp; benchmarks →</Link>
+          <Link to="/docs/why-shakapacker-rspack">Full comparison guide &amp; benchmarks →</Link>
         </p>
       </div>
     </section>
