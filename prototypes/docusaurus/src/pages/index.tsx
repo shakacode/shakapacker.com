@@ -85,7 +85,7 @@ const comparisonRows = [
   },
   {
     option: 'jsbundling-rails',
-    cells: ['esbuild / rollup / bun', 'minimal', '✓', 'partial', 'limited', '✓ (Propshaft)', 'Simple modern JS'],
+    cells: ['esbuild / rollup / bun', 'minimal', '✓', '✗', 'limited', '✓ (Propshaft)', 'Simple modern JS'],
   },
   {
     option: 'Vite Ruby',
@@ -303,7 +303,7 @@ function ComparisonSection() {
           </table>
         </div>
         <p className={styles.compareFootnote}>
-          <Link to="/docs/transpiler-performance">Full comparison &amp; benchmarks →</Link>
+          <Link to="/docs/why-shakapacker-rspack">Full comparison guide &amp; benchmarks →</Link>
         </p>
       </div>
     </section>
