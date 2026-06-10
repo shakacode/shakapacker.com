@@ -13,11 +13,9 @@ const RSPACK_PACKAGE_README =
 const WEBPACK_PACKAGE_README =
   'https://github.com/shakacode/shakapacker/blob/main/packages/shakapacker-webpack/README.md';
 
-// Rspack is the recommended default (it ships SWC, so no separate transpiler is needed).
-// npm 7+ auto-installs the required bundler peers (@rspack/core, @rspack/cli,
-// rspack-manifest-plugin). pnpm and Yarn don't auto-install peers and resolve dependencies
-// strictly, so they list those peers plus shakapacker — the core package the generated
-// config imports — explicitly in the app's package.json.
+// The Yarn/pnpm commands also list shakapacker explicitly because the generated config
+// imports it directly. See docs/migration/v10.1-supplemental-packages.md
+// ("Package manager support") for per-package-manager behavior.
 const NPM_INSTALL = 'npm install --save-dev shakapacker-rspack';
 const YARN_INSTALL =
   'yarn add --dev shakapacker-rspack shakapacker @rspack/core @rspack/cli rspack-manifest-plugin';
@@ -230,9 +228,10 @@ function OnePackageSection() {
           </Tabs>
           <p className={styles.installNote}>
             Defaults to Rspack — it ships SWC, so there&rsquo;s no separate transpiler to install.
-            Yarn and pnpm don&rsquo;t auto-install peers, so they list the bundler peers and{' '}
-            <code>shakapacker</code> explicitly; the Rails installer (<code>bin/rails shakapacker:install</code>)
-            writes them into your <code>package.json</code> for you either way.
+            Unlike npm 7+, Yarn and pnpm can&rsquo;t rely on the one-package install, so their
+            commands list the bundler peers and <code>shakapacker</code> explicitly; the Rails
+            installer (<code>bin/rails shakapacker:install</code>) writes them into your{' '}
+            <code>package.json</code> for you either way.
           </p>
         </div>
         <p className={styles.webpackPointer}>
