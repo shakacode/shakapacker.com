@@ -2,8 +2,25 @@ import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
 
 import styles from './index.module.css';
+
+const RSPACK_PACKAGE_README =
+  'https://github.com/shakacode/shakapacker/blob/main/packages/shakapacker-rspack/README.md';
+const WEBPACK_PACKAGE_README =
+  'https://github.com/shakacode/shakapacker/blob/main/packages/shakapacker-webpack/README.md';
+
+// The Yarn/pnpm commands also list shakapacker explicitly because the generated config
+// imports it directly. See docs/migration/v10.1-supplemental-packages.md
+// ("Package manager support") for per-package-manager behavior.
+const NPM_INSTALL = 'npm install --save-dev shakapacker-rspack';
+const YARN_INSTALL =
+  'yarn add --dev shakapacker-rspack shakapacker @rspack/core @rspack/cli rspack-manifest-plugin';
+const PNPM_INSTALL =
+  'pnpm add --save-dev shakapacker-rspack shakapacker @rspack/core @rspack/cli rspack-manifest-plugin';
 
 const quickStartSteps = [
   {
@@ -175,6 +192,61 @@ function QuickStartSection() {
               </p>
             </article>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OnePackageSection() {
+  return (
+    <section className={styles.section}>
+      <div className="container">
+        <p className={styles.onePackageKicker}>New in v10.1</p>
+        <h2>One Package, the Full Build Stack</h2>
+        <p className={styles.onePackageIntro}>
+          Shakapacker 10.1 adds two supplemental packages —{' '}
+          <Link to={RSPACK_PACKAGE_README}>shakapacker-rspack</Link> and{' '}
+          <Link to={WEBPACK_PACKAGE_README}>shakapacker-webpack</Link> — that carry the managed
+          build stack as required peer dependencies. Install one package instead of wiring up four.
+        </p>
+        <div className={styles.installCard}>
+          <Tabs groupId="package-manager">
+            <TabItem value="npm" label="npm" default>
+              <CodeBlock language="bash">{NPM_INSTALL}</CodeBlock>
+              <p className={styles.installCaption}>
+                npm 7+ auto-installs the required peers: <code>@rspack/core</code>,{' '}
+                <code>@rspack/cli</code>, and <code>rspack-manifest-plugin</code>.
+              </p>
+            </TabItem>
+            <TabItem value="yarn" label="Yarn">
+              <CodeBlock language="bash">{YARN_INSTALL}</CodeBlock>
+            </TabItem>
+            <TabItem value="pnpm" label="pnpm">
+              <CodeBlock language="bash">{PNPM_INSTALL}</CodeBlock>
+            </TabItem>
+          </Tabs>
+          <p className={styles.installNote}>
+            Defaults to Rspack — it ships SWC, so there&rsquo;s no separate transpiler to install.
+            Unlike npm 7+, Yarn and pnpm can&rsquo;t rely on the one-package install, so their
+            commands list the bundler peers and <code>shakapacker</code> explicitly; the Rails
+            installer (<code>bin/rails shakapacker:install</code>) writes them into your{' '}
+            <code>package.json</code> for you either way.
+          </p>
+        </div>
+        <p className={styles.webpackPointer}>
+          Prefer webpack? Swap in <Link to={WEBPACK_PACKAGE_README}>shakapacker-webpack</Link> for
+          the managed webpack stack.
+        </p>
+        <div className={styles.migrationCallout}>
+          <p className={styles.migrationCalloutText}>
+            <strong>Already on Shakapacker 10.0?</strong> Collapse four dependencies into one — your{' '}
+            <code>shakapacker.yml</code> and build configs stay unchanged.
+          </p>
+          <div className={styles.migrationLinks}>
+            <Link to="/docs/migration/v10.1-supplemental-packages">Migration guide</Link>
+            <Link to="/docs/dependency-strategy">Dependency strategy</Link>
+          </div>
         </div>
       </div>
     </section>
@@ -361,6 +433,7 @@ export default function Home(): ReactNode {
       <HeroSection />
       <main>
         <QuickStartSection />
+        <OnePackageSection />
         <RspackSection />
         <ComparisonSection />
         <HighlightsSection />

@@ -362,6 +362,80 @@
   font-weight: 600;
 }
 
+.onePackageKicker {
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 620;
+  color: var(--ifm-color-primary);
+}
+
+.onePackageIntro {
+  max-width: 48rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ifm-color-content-secondary);
+  margin-bottom: 1.25rem;
+}
+
+.installCard {
+  max-width: 52rem;
+  background: var(--site-surface-0);
+  border: 1px solid var(--site-border-color);
+  border-radius: 12px;
+  padding: 1.25rem 1.25rem 1rem;
+  box-shadow: var(--site-card-shadow);
+}
+
+.installCaption,
+.installNote {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ifm-color-content-secondary);
+}
+
+.installCaption {
+  margin: 0.6rem 0 0;
+}
+
+.installNote {
+  margin: 0.9rem 0 0;
+}
+
+.webpackPointer {
+  margin: 1rem 0 0;
+  color: var(--ifm-color-content-secondary);
+}
+
+.migrationCallout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  max-width: 52rem;
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--site-border-color);
+  border-left: 3px solid var(--ifm-color-primary);
+  border-radius: 10px;
+  background: var(--site-surface-1);
+}
+
+.migrationCalloutText {
+  flex: 1 1 22rem;
+  margin: 0;
+  color: var(--ifm-color-content-secondary);
+}
+
+.migrationLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-weight: 600;
+}
+
 @media (max-width: 996px) {
   .heroBanner {
     padding: 2.25rem 0 2.1rem;
