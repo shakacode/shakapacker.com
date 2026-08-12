@@ -19,6 +19,11 @@ test("Algolia is enabled only by a complete three-value configuration", () => {
   assert.match(config, /\.\.\.\(useAlgolia && \{[\s\S]*algolia: \{[\s\S]*contextualSearch: true/);
 });
 
+test("production pages publish the Algolia domain verification tag", () => {
+  assert.match(config, /name: 'algolia-site-verification'/);
+  assert.match(config, /content: 'BEAF397BBAC53B25'/);
+});
+
 test("CI passes protected credentials without breaking fork builds", () => {
   assert.match(workflow, /ALGOLIA_APP_ID: \$\{\{ secrets\.ALGOLIA_APP_ID \}\}/);
   assert.match(workflow, /ALGOLIA_SEARCH_API_KEY: \$\{\{ secrets\.ALGOLIA_SEARCH_API_KEY \}\}/);

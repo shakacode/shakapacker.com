@@ -184,6 +184,10 @@ const config: Config = {
     image: 'img/brand/og-card.png',
     metadata: [
       {name: 'description', content: siteDescription},
+      {
+        name: 'algolia-site-verification',
+        content: 'BEAF397BBAC53B25',
+      },
       {property: 'og:type', content: 'website'},
       {property: 'og:site_name', content: 'Shakapacker'},
       {property: 'og:image:width', content: '1200'},
