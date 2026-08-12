@@ -33,11 +33,18 @@ jobs:
       - name: Prepare docs
         run: npm run prepare:docs
 
+      - name: Test Algolia configuration
+        run: npm run test:algolia-config
+
       - name: Install site dependencies
         run: npm --prefix prototypes/docusaurus install
 
       - name: Build site
         run: npm run build:site
+        env:
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_SEARCH_API_KEY: ${{ secrets.ALGOLIA_SEARCH_API_KEY }}
+          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_APP_ID != '' && secrets.ALGOLIA_SEARCH_API_KEY != '' && vars.ALGOLIA_INDEX_NAME || '' }}
 
   deploy:
     if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork == false)
@@ -64,11 +71,18 @@ jobs:
       - name: Prepare docs
         run: npm run prepare:docs
 
+      - name: Test Algolia configuration
+        run: npm run test:algolia-config
+
       - name: Install site dependencies
         run: npm --prefix prototypes/docusaurus install
 
       - name: Build site
         run: npm run build:site
+        env:
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_SEARCH_API_KEY: ${{ secrets.ALGOLIA_SEARCH_API_KEY }}
+          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_APP_ID != '' && secrets.ALGOLIA_SEARCH_API_KEY != '' && vars.ALGOLIA_INDEX_NAME || '' }}
 
       - name: Determine deploy branch
         id: deploy_branch
