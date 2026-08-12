@@ -33,11 +33,11 @@ jobs:
       - name: Prepare docs
         run: npm run prepare:docs
 
-      - name: Test Algolia configuration
-        run: npm run test:algolia-config
-
       - name: Install site dependencies
         run: npm --prefix prototypes/docusaurus install
+
+      - name: Test Algolia configuration
+        run: npm run test:algolia-config
 
       - name: Build site
         run: npm run build:site
@@ -71,11 +71,11 @@ jobs:
       - name: Prepare docs
         run: npm run prepare:docs
 
-      - name: Test Algolia configuration
-        run: npm run test:algolia-config
-
       - name: Install site dependencies
         run: npm --prefix prototypes/docusaurus install
+
+      - name: Test Algolia configuration
+        run: npm run test:algolia-config
 
       - name: Build site
         run: npm run build:site
