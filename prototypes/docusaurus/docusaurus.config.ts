@@ -8,6 +8,34 @@ const siteUrl = 'https://shakapacker.com';
 const siteDescription =
   'Modern JavaScript and CSS bundling for Rails applications, powered by webpack or Rspack.';
 
+// Prefer hosted DocSearch when CI provides the complete public search
+// configuration. Local builds and fork previews keep the bundled local index.
+const algoliaConfig = {
+  appId: process.env.ALGOLIA_APP_ID,
+  apiKey: process.env.ALGOLIA_SEARCH_API_KEY,
+  indexName: process.env.ALGOLIA_INDEX_NAME,
+};
+const algoliaConfigValues = Object.values(algoliaConfig);
+const useAlgolia = algoliaConfigValues.every(Boolean);
+
+if (algoliaConfigValues.some(Boolean) && !useAlgolia) {
+  throw new Error(
+    'Algolia search configuration is incomplete. Set ALGOLIA_APP_ID, ALGOLIA_SEARCH_API_KEY, and ALGOLIA_INDEX_NAME together.'
+  );
+}
+
+const localSearchTheme: NonNullable<Config['themes']>[number] = [
+  '@easyops-cn/docusaurus-search-local',
+  {
+    hashed: true,
+    indexBlog: false,
+    docsRouteBasePath: '/docs',
+    highlightSearchTermsOnTargetPage: true,
+    searchResultLimits: 8,
+    searchBarShortcutHint: true,
+  },
+];
+
 // Schema.org structured data so search engines understand the project, its
 // publisher, and the site. Emitted once into <head> via headTags below.
 const structuredData = {
@@ -125,19 +153,7 @@ const config: Config = {
     locales: ['en'],
   },
 
-  themes: [
-    [
-      '@easyops-cn/docusaurus-search-local',
-      {
-        hashed: true,
-        indexBlog: false,
-        docsRouteBasePath: '/docs',
-        highlightSearchTermsOnTargetPage: true,
-        searchResultLimits: 8,
-        searchBarShortcutHint: true,
-      },
-    ],
-  ],
+  themes: useAlgolia ? [] : [localSearchTheme],
 
   presets: [
     [
@@ -168,6 +184,10 @@ const config: Config = {
     image: 'img/brand/og-card.png',
     metadata: [
       {name: 'description', content: siteDescription},
+      {
+        name: 'algolia-site-verification',
+        content: 'BEAF397BBAC53B25',
+      },
       {property: 'og:type', content: 'website'},
       {property: 'og:site_name', content: 'Shakapacker'},
       {property: 'og:image:width', content: '1200'},
@@ -316,6 +336,14 @@ const config: Config = {
       darkTheme: accessibleVsDark,
       additionalLanguages: ['ruby', 'markup-templating', 'erb', 'diff', 'haml', 'bash', 'regex', 'ignore'],
     },
+    ...(useAlgolia && {
+      algolia: {
+        appId: algoliaConfig.appId!,
+        apiKey: algoliaConfig.apiKey!,
+        indexName: algoliaConfig.indexName!,
+        contextualSearch: true,
+      },
+    }),
   } satisfies Preset.ThemeConfig,
 };
 
