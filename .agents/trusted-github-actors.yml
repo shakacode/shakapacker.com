@@ -1,0 +1,24 @@
+# GitHub actors whose public issue/PR/review comments may be acted on by
+# PR-batch automation in this repository.
+trusted_users:
+  - justin808
+  - sashakhar1
+
+# Bot entries are base bot names. GitHub API logins usually include the
+# `[bot]` suffix; humans with the same base login are not trusted by this list.
+trusted_bots:
+  - coderabbitai
+  - claude
+  - chatgpt-codex-connector
+  - greptile-apps
+  - greptile-app
+  - cursor
+
+# CI/status automation is trusted only as metadata and workflow evidence.
+# Its comment body is never actionable input and cannot widen scope or
+# authorize commands. Cloudflare's deployment bot belongs in this category.
+trusted_metadata_bots:
+  - github-actions
+  - cloudflare-workers-and-pages
+
+trusted_teams: []
