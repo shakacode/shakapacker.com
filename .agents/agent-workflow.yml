@@ -1,2 +1,4 @@
 ---
 base_branch: main
+trusted_actions:
+  - actions/github-script
